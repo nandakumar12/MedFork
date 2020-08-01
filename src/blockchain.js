@@ -77,6 +77,74 @@ class Blockchain {
 
     return proof;
   }
+
+  validProof(lastProof, proof) {
+    const guess = `${lastProof}${proof}`;
+    const guessHash = getSHA256HexString(guess);
+
+    return /^0000/.test(guessHash);
+  }
+
+  registerNode(address) {
+    const host = parse(address).host;
+
+    this.nodes.add(host);
+  }
+
+  validChain(chain) {
+    let index = 1;
+
+    while (index < chain.length) {
+      const previousBlock = chain[index - 1];
+      const block = chain[index];
+
+      if (block.previousHash !== this.hash(previousBlock)) {
+        return false;
+      }
+
+      if (!this.validProof(previousBlock.proof, block.proof)) {
+        return false;
+      }
+
+      index++;
+    }
+
+    return true;
+  }
+
+  resolveConflicts() {
+    const fetchPromises = [];
+
+    this.nodes.forEach((host) => {
+      fetchPromises.push(
+        fetch(`http://${host}/chain`)
+          .then((res) => {
+            if (res.ok) {
+              return res.json();
+            }
+          })
+          .then((json) => json)
+      );
+    });
+
+    return Promise.all(fetchPromises).then((chains) => {
+      let newChain = null;
+      let maxLength = this.chain.length;
+
+      chains.forEach(({ chain }) => {
+        if (chain.length > maxLength && this.validChain(chain)) {
+          maxLength = chain.length;
+          newChain = chain;
+        }
+      });
+
+      if (newChain) {
+        this.chain = newChain;
+      }
+
+      return !!newChain;
+    });
+  }
 }
 
 module.exports=Blockchain;
