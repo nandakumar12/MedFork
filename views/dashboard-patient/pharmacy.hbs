@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Pharmacy</title>
+
+    {{>dashboard-styles}}
+
+    <style>
+        thead {
+            background-color: #333;
+        }
+    </style>
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+        <!-- MENU SIDEBAR-->
+        {{>dashboard-sidebar}}
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            {{>dashboard-header}}
+            <!-- END HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE -->
+                                <h3 class="title-5 m-b-35">Pharmacy</h3>
+                                <div class="table-data__tool">
+                                    <div class="table-data__tool-left">
+                                        <div class="rs-select2--light rs-select2--md">
+                                            <select class="js-select2" name="property">
+                                                <option selected="selected">All Properties</option>
+                                                <option value="">Option 1</option>
+                                                <option value="">Option 2</option>
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+                                        <div class="rs-select2--light rs-select2--sm">
+                                            <select class="js-select2" name="time">
+                                                <option selected="selected">Today</option>
+                                                <option value="">3 Days</option>
+                                                <option value="">1 Week</option>
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+                                        <button class="au-btn-filter">
+                                            <i class="zmdi zmdi-filter-list"></i>filters</button>
+                                    </div>
+                                    <div class="table-data__tool-right">
+                                        <button class="au-btn au-btn-icon au-btn--green au-btn--small">
+                                            <i class="zmdi zmdi-plus"></i>add item</button>
+                                        <div class="rs-select2--dark rs-select2--sm rs-select2--dark2">
+                                            <select class="js-select2" name="type">
+                                                <option selected="selected">Export</option>
+                                                <option value="">Option 1</option>
+                                                <option value="">Option 2</option>
+                                            </select>
+                                            <div class="dropDownSelect2"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="table-responsive table-responsive-data2">
+                                    <table class="table table-data2">
+                                        <thead>
+                                            <tr>
+                                                <th style="color: white;">Reg.No</th>
+                                                <th style="color: white;">Pharmacy</th>
+                                                <th style="color: white;">Prescription</th>
+                                                <th style="color: white;">Address</th>
+                                                <th style="color: white;">Date</th>
+                                                <th style="color: white;">status</th>
+                                                <th style="color: white;">More Info</th>
+                                                <th style="color: white;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each row}}
+                                                <tr class="tr-shadow">
+                                                    <td>{{this.pharmacyR}}</td>
+                                                    <td>
+                                                        <span class="block-email">{{this.pharmacyPharmacy}}</span>
+                                                    </td>
+                                                    <td class="desc">{{this.pharmacyPrescription}}</td>
+                                                    <td class="desc">{{this.pharmacyAddress}}</td>
+                                                    <td>{{this.pharmacyDate}}</td>
+                                                    <td>
+                                                        <span class="status--process">Processed</span>
+                                                    </td>
+                                                    <td><a href="/check-prescription">Check</a></td>
+                                                    <td>
+                                                        <div class="table-data-feature">
+                                                            <button class="item" data-toggle="tooltip" data-placement="top"
+                                                                title="Send">
+                                                                <i class="zmdi zmdi-mail-send"></i>
+                                                            </button>
+
+                                                            <button class="item" data-toggle="tooltip" data-placement="top"
+                                                                title="More">
+                                                                <i class="zmdi zmdi-download"></i>
+                                                            </button>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                                <tr class="spacer"></tr>
+                                            {{/each}}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END DATA TABLE -->
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a
+                                            href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{>dashboard-scripts}}
+
+</body>
+
+</html>
+<!-- end document-->

@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>About</title>
+
+    {{>dashboard-styles}}
+    <link rel="stylesheet" href="../../public/dashboard/css/custom.css">
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+
+        <!-- MENU SIDEBAR-->
+        {{>dashboard-sidebar}}
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            {{>dashboard-header}}
+            <!-- END HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <!-- USER DATA-->
+                                <div class="user-data m-b-30">
+                                    <h3 class="title-3 m-b-30">
+                                        <i class="zmdi zmdi-account-calendar"></i>user data</h3>
+                                    <div class="table-responsive table-data">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>UUID: </h3>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>{{patientUUID}}</h3>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>Name: </h3>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>{{patientName}}</h3>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>Age: </h3>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>{{patientAge}}</h3>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>Gender: </h3>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>{{patientGender}}</h3>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>Address: </h3>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>{{patientAddress}}</h3>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>Contact No: </h3>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>{{patientPnum}}</h3>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- END USER DATA-->
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a
+                                            href="https://colorlib.com">Colorlib</a>.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{>dashboard-scripts}}
+
+</body>
+
+</html>
+<!-- end document-->
