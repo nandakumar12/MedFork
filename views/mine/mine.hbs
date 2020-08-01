@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Processing</title>
+<link href="../../public/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="../../public/js/bootstrap.min.js"></script>
+<script src="../../public/js/jquery-1.12.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+<style>
+    body{background-color:#fff !important;}
+.text-white{color:#fff;text-shadow:1px 1px 1px #000;}
+h3.h3{text-align:center;padding:1.5em 0em 2em 0em;text-transform:capitalize;font-size:1.5em;}
+.container-fluid{padding:2em 0em 4em 0em;background: linear-gradient(to right,#7474bf,#348ac7);}
+.container{padding:2em 0em 5em 0em;}
+.bg-1{background: linear-gradient(to right,#7b4379,#dc2430);}
+.bg-2{background:#ABAD5D;}
+.bg-3{background:#1ABC9C;}
+/********************  Preloader Demo-1 *******************/
+.preloader1,.preloader1 .loader{display:flex;align-content:center}
+.preloader1{height:100%;width:100%;padding:20px 0;flex-flow:column wrap;justify-content:center;align-items:center;perspective:700}
+.preloader1 .loader{text-align:center;margin:5px;border-radius:50%;border:4px solid #fff;flex-flow:column wrap;justify-content:center;align-items:center;transform-style:preserve-3d;position:relative}
+.preloader1 .preloader1 .loader-inner-1{animation:change_first_circle 2s ease-in-out infinite}
+.preloader1 .loader-inner-2{animation:change_second_circle 2s ease-in-out infinite}
+.preloader1 .loader-inner-3{width:100px;height:100px;animation:change_last_circle 3s linear infinite}
+@keyframes change_first_circle{
+    50%{transform:rotateX(360deg) scale(.8)}
+}
+@keyframes change_second_circle{
+    50%{transform:rotateY(360deg) scale(.8)}
+}
+@keyframes change_last_circle{
+    50%{transform:rotateX(360deg) scale(.8)}
+}
+
+</style>
+</head>
+
+<body>
+
+    <div class="container-fluid">
+        <div class="container">
+            <h3 class="data h3 text-white">Mining the data...</h3>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="preloader1">
+                        <div class="loader loader-inner-1">
+                            <div class="loader loader-inner-2">
+                                <div class="loader loader-inner-3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var random = (Math.floor(Math.random() * 7) + 1)*1000;
+        console.log(random);
+        setTimeout(function() {
+            document.querySelector('.data').innerHTML = 'Data updated successfully!!';
+        },random);
+        setTimeout(function() {
+            document.querySelector('.data').innerHTML = 'Redirecting to home page';
+        },random);      
+        setTimeout(function () {
+           //Redirect with JavaScript
+           window.location.href= "hospital-dashboard";
+        }, random);
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+
+    <!-- Title Page-->
+    <title>Full Chain</title>
+    <link rel="icon" href="../static/img/favicon.png">
+
+    <!-- Icons font CSS-->
+    <link href="../static/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="../static/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+
+    <!-- Font special for pages-->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
+
+    <!-- Vendor CSS-->
+    <link href="../static/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="../static/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <!-- Main CSS-->
+    <link href="../static/css/main.css" rel="stylesheet" media="all">
+
+    {{>styles}}
+</head>
+
+<body>
+    <div class="main-body">
+        {{>navbar}}
+
+    <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
+        <div class="wrapper wrapper--w790" style="max-width:900px;">
+            <div class="card card-5">
+                <div class="card-heading">
+                    <h2 class="title">FULL Chain</h2>
+                </div>
+
+                <div class="container">
+                    <div class="table-responsive" style="padding-bottom: 200px;">
+                        <table class="table table-striped" id="table">
+                            <tr>
+                                <th>Index</th>
+                                <th>Timestamp</th>
+                                <th>Transactions</a>
+                                </th>
+                                <th>Proof</th>
+                                <th>Previous Hash</th>
+                                <th></th>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+    {{>scripts}}
+
+<script>
+        $(document).ready(function() {
+            function doesFileExist(urlToFile) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('HEAD', urlToFile, false);
+                xhr.send();
+
+                if (xhr.status == "404") {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+
+
+
+        for(var i=10 ; i>=0 ; i--){
+            var result = doesFileExist("../static/block_explorer/" + i + "block.json");
+            if (result === true) {
+                    $.ajax({
+                        url:"../static/block_explorer/"+i+"block.json",
+                        dataType: "json",
+                        success:function(data){
+                            $(data).each(function(index,value){
+                                var record='<tr><td>'+value.index+'</td><td>'
+                                                    +value.timestamp+'</td><td> <a href="/transactions-info" id="info">Transaction Info</a></td><td>'
+                                                    +value.proof+'</td><td>'
+                                                    +value.previous_hash+'</td>';
+                                $('table').append(record);
+                            });
+                        }
+                    });
+            } else {
+                continue;
+            }
+        }
+    });
+    </script>
+
+</body>
+
+</html>
+<!-- end document-->
