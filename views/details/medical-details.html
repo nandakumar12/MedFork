@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Applicant Details</title>
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="../static/css/util.css">
+	<link rel="stylesheet" type="text/css" href="../static/css/form.css">
+<!--===============================================================================================-->
+
+ <!-- Main CSS-->
+ <link href="../static/css/main.css" rel="stylesheet" media="all">
+ <!-- owl carousel CSS -->
+ <link rel="stylesheet" href="../static/css/owl.carousel.min.css">
+ <!-- themify CSS -->
+ <link rel="stylesheet" href="../static/css/themify-icons.css">
+ <!-- flaticon CSS -->
+ <link rel="stylesheet" href="../static/css/flaticon.css">
+ <!-- magnific popup CSS -->
+ <link rel="stylesheet" href="../static/css/magnific-popup.css">
+ <!-- nice select CSS -->
+ <link rel="stylesheet" href="../static/css/nice-select.css">
+ <!-- swiper CSS -->
+ <link rel="stylesheet" href="../static/css/slick.css">
+ <!-- style CSS -->
+ <link rel="stylesheet" href="../static/css/style.css">
+
+</head>
+<body>
+
+     <!--::header part start::-->
+    <div class="main-body">
+        <header class="main_menu home_menu" style="position: static;">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-12">
+                        <nav class="navbar navbar-expand-lg navbar-light">
+                            <a class="navbar-brand" href="index.html"> <img src="../static/img/logo.png" alt="logo" style="max-width:230px; position: relative; top:8px; left:50px;"> </a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse"
+                                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                                aria-expanded="false" aria-label="Toggle navigation">
+                                <span class="navbar-toggler-icon"></span>
+                            </button>
+                            
+    
+                            <div class="collapse navbar-collapse main-menu-item justify-content-center"
+                                id="navbarSupportedContent">
+                                <ul class="navbar-nav align-items-center">
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="{{url_for('index')}}">Home</a>
+                                    </li>
+                                    <li class="nav-item active">
+                                        <a class="nav-link" href="{{url_for('key_generation')}}">Key Generation</a>
+                                    </li>
+                                   
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{url_for('applicant_details')}}">Applicant Details</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{url_for('block_explorer')}}">Block Explorer</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="{{url_for('full_chain')}}">Full Chain</a>
+                                    </li>
+                                    <li class="nav-item dropdown">
+                                        <a class="nav-link dropdown-toggle" id="navbarDropdown"
+                                            role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            Manage
+                                        </a>
+                                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                            <!-- <a class="dropdown-item" href="#">Hospital Registration</a> -->
+                                            <a class="dropdown-item nav-link" href="{{url_for('medical_details')}}">Medical Details</a>
+                                            <a class="dropdown-item nav-link" href="{{url_for('latest_transaction')}}">Latest Transaction</a>
+                                            <a class="dropdown-item nav-link" href="{{url_for('mine_page')}}">Mine</a>
+                                            <a class="dropdown-item nav-link" href="{{url_for('version_holder')}}">Version Holder</a>
+                                            <a class="dropdown-item nav-link" href="{{url_for('node_registration')}}">Node Registration</a>
+                                            <a class="dropdown-item nav-link" href="{{url_for('full_transaction')}}">Full Transaction</a>
+                                        </div>
+                                    </li>
+    
+                              
+                                </ul>
+                            </div>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Header part end-->
+    
+    
+
+
+    <div class="container-contact100" style="padding: 70px; ">
+        
+        <div class="contact100-map" id="google_map" data-map-x="40.722047" data-map-y="-73.986422" data-pin="images/icons/map-marker.png" data-scrollwhell="0" data-draggable="1"></div>
+        <div class="bg-video">
+            <video class="bg-video__content" autoplay muted loop>
+                <source src="../static/img/video.mp4" type="video/mp4">
+                <source src="../static/img/video.webm" type="video/webm">
+                Your browser is not supported!
+            </video>
+        </div>
+
+		<div class="wrap-contact100">
+            
+			<form class="contact100-form validate-form" method="POST" action="processing">
+				<span class="contact100-form-title">
+					Medical Details
+                </span>
+                
+                <div class="form-row p-t-20">
+                    <div>
+                         <label class="radio-container m-r-55">Update
+                             <input type="radio" checked="checked" name="exist" value="exist1">
+                             <span class="checkmark"></span>
+                         </label>
+                         <label class="radio-container">New
+                             <input type="radio" name="exist" value="exist2">
+                             <span class="checkmark"></span>
+                         </label>
+                     </div>
+                 </div>
+
+				<div class="wrap-input100 validate-input" data-validate="Please enter patient's uuid">
+					<input class="input100" type="number" name="uuid" placeholder="UUID">
+					<span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Please enter doctor's duid">
+					<input class="input100" type="number" name="duid" placeholder="DUID">
+					<span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Please enter patient's diabetesc level">
+					<input class="input100" type="number" name="diabetes_level" placeholder="Diabetes Level">
+					<span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Please enter patient's bp level">
+					<input class="input100" type="number" name="bp_level" placeholder="Blood Pressure Level">
+					<span class="focus-input100"></span>
+                </div>
+
+				<div class="wrap-input100 validate-input" data-validate = "Please enter patient's diagnosis details">
+					<textarea class="input100" name="details" placeholder="Diagnosis Details"></textarea>
+					<span class="focus-input100"></span>
+				</div>
+
+				<div class="container-contact100-form-btn">
+					<button class="contact100-form-btn" type="submit" id="submit">
+						Register
+					</button>
+				</div>
+			</form>
+
+			<div class="contact100-more">
+				Contact us on: <span class="contact100-more-highlight">medfork@chennai.com</span>
+			</div>
+		</div>
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="../static/vendor/jquery/jquery.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/vendor/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/vendor/bootstrap/js/popper.js"></script>
+	<script src="../static/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/vendor/daterangepicker/moment.min.js"></script>
+	<script src="../static/vendor/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/vendor/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/js/map-custom.js"></script>
+<!--===============================================================================================-->
+	<script src="../static/js/form.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>
