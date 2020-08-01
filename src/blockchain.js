@@ -36,7 +36,7 @@ class Blockchain {
     return block;
   }
 
-  newTransaction(
+  newTransaction({
     digitalSignDoctor,
     digitalSignPatient,
     publicKeyDoctor,
@@ -44,7 +44,7 @@ class Blockchain {
     ipfsFileHash,
     capsule,
     uid
-  ) {
+  }) {
     this.currentTransactions.push({
       digitalSignDoctor,
       digitalSignPatient,
