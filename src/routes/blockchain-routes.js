@@ -1,9 +1,16 @@
+const IPFS = require('ipfs')
 const express = require("express");
 const bodyParser = require("body-parser");
 const multer = require("multer");
+const getNodeIdentifier = require("../utils");
 const fs = require("fs");
+const initiateTransaction = require("../inititate-transaction");
 const path= require("path");
 
+let ipfs;
+IPFS.create().then((ipfsInstance)=>{
+  ipfs=ipfsInstance;
+})
 
 const getApp = (blockchain) => {
   if (!blockchain) {
@@ -34,6 +41,16 @@ const getApp = (blockchain) => {
 
   router.post("/transactions/new", upload.array(), (req, res) => {
     console.log("initiated new transaction");
+    const { uid, duid, medicalDetials } = req.body;
+    console.log(uid, duid, medicalDetials);
+    // Implement the logic
+    fs.writeFileSync(path.join(__dirname,"../../encrypted-files",`${uid}-medical-report.json`),
+      JSON.stringify(medicalDetials)
+    );
+    /*
+      initiateTransaction will process everything from reading the pubkeys 
+      and inserting the transaction into blockchain
+    **/
     initiateTransaction(uid, duid, blockchain, ipfs);
     const response = {
       message: "Transaction will be added to The Blockchain",
@@ -74,6 +91,30 @@ const getApp = (blockchain) => {
     return res.send({
       chainLength: blockchain.chainLength,
     });
+  });
+
+  router.get("/nodes/resolve", (req, res) => {
+    let response;
+    blockchain
+      .resolveConflicts()
+      .then((replaced) => {
+        if (replaced) {
+          response = {
+            message: "Our chain was replaced",
+            newChain: blockchain.chain,
+          };
+        } else {
+          response = {
+            message: "Our chain is authoritative",
+            chain: blockchain.chain,
+          };
+        }
+
+        res.send(response);
+      })
+      .catch(() => {
+        res.status(502).send("Failed to contact nodes");
+      });
   });
 
   return router;

@@ -12,6 +12,10 @@ const publicDirectory = path.join(__dirname, "../../views/layouts");
 const detailsDirectory = path.join(__dirname, "../../views/details");
 const loginDirectory = path.join(__dirname, "../../views/login");
 const keygenDirectory = path.join(__dirname, "../../views/key-generation");
+const dashboardDirectory = path.join(__dirname, "../../views/dashboard");
+const loaderDirectory = path.join(__dirname, "../../views/loader");
+const registerationDirectory = path.join(__dirname, "../../views/register");
+const mineDirectory = path.join(__dirname, "../../views/mine");
 
 
 const getApp = (blockchain) =>{
@@ -40,6 +44,19 @@ router.get("/patient-login", (req, res) => {
   res.sendFile(path.join(loginDirectory, "patient.html"));
 });
 
+router.post("/hospital-dashboard", (req, res) => {
+  if (req.body.login == "admin" && req.body.password == "password")
+    res.sendFile(path.join(dashboardDirectory, "hospital-dashboard.html"));
+  else if (req.body.login != "admin" && req.body.password != "password")
+    res.sendFile(path.join(loginDirectory, "patient.html"));
+});
+
+router.get("/key-generation", (req, res) => {
+  axios.get(` http://127.0.0.1:8085/genKeyPair?uuid=${req.query.uid}`)
+  axios.get(`http://127.0.0.1:8085/genKeyPair?uuid=${req.query.duid}_doc`)
+  res.sendFile(path.join(keygenDirectory, "key-generation.html"));
+});
+
 router.post("/applicant-details", (req, res) => {
   const uuid = req.body.uuid;
   encrypt.genKeypairs(uuid);
@@ -58,6 +75,25 @@ router.post("/processing", (req, res) => {
   const address = req.body.address;
   const pnum = req.body.pnum;
 
+  encrypt.genKeypairs(ruid);
+  const personalDetails = {
+    uuid,
+    ruid,
+    name,
+    dob,
+    address,
+    pnum,
+  };
+  new PatientDetails(personalDetails)
+    .save()
+    .then((res) => {
+      console.log(res);
+    })
+    .catch((err) => {
+      console.log(err + "error in saving PatientDetails");
+    });
+  console.log("Personal Data Stored in DB");
+
   res.sendFile(path.join(loaderDirectory, "processing.html"));
 });
 
@@ -72,6 +108,22 @@ router.post("/processsing", (req, res) => {
   const bpLevel = req.body.bp_level;
   const otherDetails = req.body.details;
 
+  encrypt.genKeypairs(duid);
+  const medicalDetails = {
+    _id: uuid,
+    duid,
+    diabetesLevel,
+    bpLevel,
+    otherDetails,
+  };
+  console.log(medicalDetails);
+  new MedicalDetails(medicalDetails)
+    .save()
+    .then()
+    .catch((err) => {
+      console.log(err + "error occured in saving medical details");
+    });
+  ipfs.addFile(JSON.stringify(medicalDetails), uuid + "-data".json);
   res.sendFile(path.json(loaderDirectory, "processing.html"));
 });
 
@@ -88,6 +140,19 @@ router.post("/index", (req, res) => {
   const proof = blockchain.proofOfWork(lastBlock);
   const previousHash = blockchain.hash(lastBlock);
   const block = blockchain.newBlock(proof, previousHash);
+  block.transactions.forEach((transaction) => {
+    new TransactionDetails({
+      uuid: transaction.uuid,
+      transactions: transaction,
+    })
+      .save()
+      .then()
+      .catch((err) => {
+        console.log(
+          err + "Error occured while saving transaction details to DB"
+        );
+      });
+  });
   const response = {
     message: "New Block Added",
     index: block.index,
@@ -98,6 +163,28 @@ router.post("/index", (req, res) => {
   console.log(response);
   res.sendFile(path.join(publicDirectory, "index.html"));
 });
-}
+
+router.get("/full-chain", (req, res) => {
+  response = {
+    chain: blockchain.chain,
+    length: blockchain.chain.length,
+  };
+  console.log(response);
+  res.sendFile(path.join(mineDirectory, "full-chain.html"));
+});
+
+router.post("/fetching-block", (req, res) => {
+  if (req.body.blockNo <= blockchain)
+    res.sendFile(path.join(loaderDirectory, "processing.html"));
+});
+
+router.get("/block", (req, res) => {
+  blockchain;
+  req.query.blockNumber;
+});
+return router;
+
+};
+
 
 module.exports = getApp;
