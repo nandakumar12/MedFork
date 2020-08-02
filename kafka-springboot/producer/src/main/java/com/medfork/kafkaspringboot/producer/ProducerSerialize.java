@@ -1,4 +1,4 @@
-package com.kafka.controller;
+package com.medfork.kafkaspringboot.producer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.core.ProducerFactory;
 import org.springframework.kafka.support.serializer.JsonSerializer;
 
-import com.message.model.MessageModel;
+import com.medfork.kafkaspringboot.model.Message;
 
 @Configuration
 public class ProducerSerialize {
@@ -31,12 +31,12 @@ public class ProducerSerialize {
     }
 
     @Bean
-    public ProducerFactory<String, MessageModel> producerFactory() {
+    public ProducerFactory<String, Message> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    public KafkaTemplate<String, MessageModel> kafkaTemplate() {
+    public KafkaTemplate<String, Message> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 

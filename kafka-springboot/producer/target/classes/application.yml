@@ -1,13 +1,18 @@
+server:
+  port: 9050
+
 spring:
   kafka:
+    newTopic: new_topic22
+    topics: messages4
     bootstrap-servers: localhost:9092
-
-app:
-  topic:
-    example: example.t
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
 
 logging:
   level:
-    root: WARN
+    root: DEBUG
     org.springframework.web: DEBUG
     com.memorynotfound: DEBUG
