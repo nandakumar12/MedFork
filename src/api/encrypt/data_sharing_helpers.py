@@ -11,8 +11,6 @@ from umbral.params import UmbralParameters
 from flask import Flask, jsonify, request
 import os
 
-
-
 app = Flask(__name__)
 CURRENT_FILE = os.path.dirname(__file__)
 ASSYMETRIC_KEY_PATH = os.path.join(CURRENT_FILE, '../../../asymmetric-keys')
@@ -25,7 +23,9 @@ def verification(uid,public_key,public_key_digitalsign):#signs on hash of the pu
 
 @app.route('/newPolicy',methods=['POST'])
 def new_policy():
+    print(ASSYMETRIC_KEY_PATH)
     print("inside new_policy")
+    print(request.get_json(force=True))
     s_uid=request.get_json()["s_uid"]
     r_uid=request.get_json()["r_uid"]
     data_hash=request.get_json()["data_hash"]
@@ -35,7 +35,7 @@ def new_policy():
     with open(f"{ASSYMETRIC_KEY_PATH}/{s_uid}_public_key.pem", "rb") as key_file:
         data_owner = key_file.read()
         data_owner = keys.UmbralPublicKey.from_bytes(data_owner)
-    with open(f"{ASSYMETRIC_KEY_PATH}/{r_uid}_public_key.pem", "rb") as key_file:
+    with open(f"{ASSYMETRIC_KEY_PATH}/{r_uid}_doc_public_key.pem", "rb") as key_file:
         reciever = key_file.read()
         reciever = keys.UmbralPublicKey.from_bytes(reciever)
     status=verification(s_uid,public_key_digitalsign,data_owner)
@@ -43,7 +43,7 @@ def new_policy():
         if not json_file_check("data_sharing_policies.json"):
             with open("data_sharing_policies.json",'w') as file:
                 dummy={
-                       'policies':[]
+                       'policies': []
                 }
                 json.dump(dummy,file)
         with open("data_sharing_policies.json",'r+') as file:
@@ -79,14 +79,15 @@ def new_policy():
 
 @app.route('/reEncrypt',methods=['POST'])
 def re_encrypt():
-    s_uid = request.get_json()["s_uid"]
-    r_uid = request.get_json()["r_uid"]
+    print(request.get_json(force=True))
+    s_uid = request.get_json(force=True)["s_uid"]
+    r_uid = request.get_json(force=True)["r_uid"]
     public_key_digitalsign = request.get_json()["public_key_digitalsign"]
     try:
         with open(f"{ASSYMETRIC_KEY_PATH}/{s_uid}_public_key.pem", "rb") as key_file:
             data_owner = key_file.read()
             data_owner = keys.UmbralPublicKey.from_bytes(data_owner)
-        with open(f"{ASSYMETRIC_KEY_PATH}/{r_uid}_public_key.pem", "rb") as key_file:
+        with open(f"{ASSYMETRIC_KEY_PATH}/{r_uid}_doc_public_key.pem", "rb") as key_file:
             reciever = key_file.read()
             reciever = keys.UmbralPublicKey.from_bytes(reciever)
     except:
@@ -110,7 +111,7 @@ def re_encrypt():
         sender_private_key = key_file.read()
         sender_private_key = keys.UmbralPrivateKey.from_bytes(sender_private_key)
         signer = signing.Signer(private_key=sender_private_key)
-    with open(f"{ASSYMETRIC_KEY_PATH}/{r_uid}_private_key.pem", "rb") as key_file:
+    with open(f"{ASSYMETRIC_KEY_PATH}/{r_uid}_doc_private_key.pem", "rb") as key_file:
         reciever_private_key = key_file.read()
         reciever_private_key = keys.UmbralPrivateKey.from_bytes(reciever_private_key)
     kfrags = pre.generate_kfrags(delegating_privkey=sender_private_key,
@@ -118,6 +119,8 @@ def re_encrypt():
                                  receiving_pubkey=reciever,
                                  threshold=10,
                                  N=20)
+    print("The capsule fragments")
+    print(*kfrags,sep="\n")
     '''with open(file_hash,'wb') as file:
         file.write(kfrags.to_bytes())
     with open(filename,'rb') as file:
@@ -141,7 +144,7 @@ def re_encrypt():
     if response == "failed":
         return jsonify({"status":"failed","message":"Either the data must be tampered or invalid private key"}),200
     else:
-        return jsonify({"status":"sucess","decryptedMessage":response})
+        return jsonify({"status":"success","decryptedMessage":response.decode()})
 
 port = 8099
 app.run(host='127.0.0.1', port=port)
