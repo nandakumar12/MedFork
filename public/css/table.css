@@ -1,0 +1,89 @@
+body {
+    font-family: 'lato', sans-serif;
+}
+
+.container {
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding: 0 70px;
+}
+
+h2 {
+    font-size: 26px;
+    margin: 20px 0;
+    text-align: center;
+    padding: 10px 0;
+}
+
+h2 small {
+    font-size: 0.5em;
+}
+
+.responsive-table li {
+    border-radius: 10px;
+    padding: 25px 30px;
+    display: flex;
+
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.responsive-table .table-header {
+    background-color: #95a5a6;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    background-color: #333;
+    color: #fff;
+}
+
+.responsive-table .table-row {
+    background-color: #fff;
+    box-shadow: 0px 0px 9px 0px rgba(0, 0, 0, 0.1);
+}
+
+.responsive-table .colo-1 {
+    flex-basis: 10%;
+}
+
+.responsive-table .colo-2 {
+    flex-basis: 20%;
+}
+
+.responsive-table .colo-3 {
+    flex-basis: 20%;
+}
+
+.responsive-table .colo-4 {
+    flex-basis: 50%;
+}
+
+@media all and (max-width: 767px) {
+    .responsive-table .table-header {
+        display: none;
+    }
+
+    .responsive-table li {
+        display: block;
+    }
+
+    .responsive-table .colo {
+        flex-basis: 100%;
+    }
+
+    .responsive-table .colo {
+        display: flex;
+        padding: 10px 0;
+    }
+
+    .responsive-table .colo:before {
+        color: #6c7a89;
+        padding-right: 10px;
+        content: attr(data-label);
+        flex-basis: 50%;
+        text-align: right;
+    }
+}
