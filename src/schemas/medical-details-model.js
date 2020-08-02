@@ -1,25 +1,46 @@
 const mongoose = require("./mongoose-connection");
-const Schema = mongoose.Schema;
 
-const medicalDetialsSchema = mongoose.Schema({ 
-
-  _id: {
+const prescriptionDetailsSchema = new mongoose.Schema({
+  medicineName: {
     type: String,
     required: true,
-    trim: true
+    trim: true,
   },
+  amount: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  when: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+});
 
+const diabetesSchema = new mongoose.Schema({
+  beforeFasting: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  afterFasting: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+});
+
+//const diabetesModel = mongoose.model("DiabetesDetials",diabetesSchema);
+
+const furtherDetailsSchema = new mongoose.Schema({
   duid: {
     type: String,
     required: true,
     trim: true,
   },
 
-  diabetesLevel: {
-    type: String,
-    require: true,
-    trim: true,
-  },
+  diabetesLevel: [diabetesSchema],
 
   bpLevel: {
     type: String,
@@ -27,13 +48,45 @@ const medicalDetialsSchema = mongoose.Schema({
     trim: true,
   },
 
+  prescriptionDetails: [prescriptionDetailsSchema],
+
   otherDetails: {
     type: String,
     required: true,
     trim: true,
-  }
+  },
+
+  hospitalRegNo: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  hospitalName: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+
+  date: {
+    type: String,
+    required: true,
+    trim: true,
+  },
 });
 
-const MedicalDetials = mongoose.model('MedicalDetials',medicalDetialsSchema);
+const medicalDetialsSchema = new mongoose.Schema({
+  _id: {
+    type: String,
+    required: true,
+    trim: true,
+  },
+  furtherDetails: [furtherDetailsSchema],
+});
 
-module.exports = MedicalDetials;
+const MedicalDetials = mongoose.model("MedicalDetials", medicalDetialsSchema);
+const FurtherDetails = mongoose.model("FurtherDetails", furtherDetailsSchema);
+
+module.exports = {
+  MedicalDetials,
+  FurtherDetails,
+};

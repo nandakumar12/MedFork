@@ -23,30 +23,12 @@ const hospitalRegistrationSchema = mongoose.Schema({
     required: true,
     trim: true,
   },
-  hospitalFacilities: {
-    type: String,
-    required: true,
-    trim: true,
-  },
   hospitalPnum: {
     type: String,
     required: true,
     trim: true,
   },
-
   hospitalPassword: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-
-  name: {
     type: String,
     required: true,
     trim: true,
