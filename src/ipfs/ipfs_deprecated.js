@@ -4,7 +4,6 @@ const fs = require("fs");
 const util = require("util");
 const BufferList = require("bl/BufferList");
 const { log } = require("console");
-const { object } = require("ipfs/src/core/components");
 const writeFile = util.promisify(fs.writeFile);
 
 //options specific to globSource
@@ -19,18 +18,20 @@ const addOptions = {
   timeout: 10000,
 };
 
-const addFile = async (ipfs, fileName, create, data) => {
+const addFile = async ( fileName, create, data = null) => {
+  let ipfs = await IPFS.create();
   const fileCID = [];
   if (create) {
     writeFile(`./encrypted-files/${fileName}_encrypted`, data)
       .then(async () => {
         console.log("adding file to ipfs...");
         for await (const file of ipfs.addAll(
-          globSource(`./json-data/${fileName}`, globSourceOptions),
+          globSource(`./ipfs.js`, globSourceOptions),
           addOptions
         )) {
           fileCID.push(file);
         }
+        console.log(fileCID[0].cid);
         return fileCID[0].cid;
       })
       .catch((err) => {
@@ -40,14 +41,13 @@ const addFile = async (ipfs, fileName, create, data) => {
   } 
   else {
     console.log("adding file to ipfs...");
-    console.log(Object.keys(ipfs));
     for await (const file of ipfs.addAll(
-      globSource(`./encrypted-files/${fileName}_encrypted`, globSourceOptions),
+      globSource(`./ipfs.js`, globSourceOptions),
       addOptions
     )) {
       fileCID.push(file);
     }
-    console.log(flieCID[0].cid);
+    console.log(fileCID[0].cid);
     return fileCID[0].cid;
   }
 };
@@ -67,6 +67,8 @@ const retriveFile = async (ipfs, cid, fileName) => {
     });
   }
 };
+
+addFile(null, false);
 
 module.exports = {
   addFile,
