@@ -26,48 +26,46 @@
 
             <div class="contact100-map" id="google_map" data-map-x="40.722047" data-map-y="-73.986422"
                 data-pin="../../public/images/icons/map-marker.png" data-scrollwhell="0" data-draggable="1"></div>
-            <div class="bg-video">
+            {{!-- <div class="bg-video">
                 <video id="myvideo" class="bg-video__content" autoplay muted loop>
                     <source src="../../public/img/video.mp4" type="video/mp4">
                     <source src="../../public/img/video.webm" type="video/webm">
                     Your browser is not supported!
                 </video>
-            </div>
+            </div> --}}
+
+
 
             <div class="wrap-contact100">
 
-                <form class="contact100-form validate-form" method="POST" action="processing">
+                <form class="contact100-form validate-form" method="POST" action="doctor-processing">
                     <span class="contact100-form-title">
                         Applicant Details
                     </span>
 
-                    <div class="wrap-input100 validate-input" data-validate="Please enter your uuid">
-                        <input class="input100" type="number" name="uuid" placeholder="UUID">
-                        <span class="focus-input100"></span>
-                    </div>
-                    <div class="wrap-input100 validate-input" data-validate="Please enter your ruid">
-                        <input class="input100" type="number" name="ruid" placeholder="RUID">
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your register number">
+                        <input class="input100" type="text" name="doctorRegNo" placeholder="Doctor Register No">
                         <span class="focus-input100"></span>
                     </div>
                     <div class="wrap-input100 validate-input" data-validate="Please enter your name">
-                        <input class="input100" type="text" name="name" placeholder="Name">
+                        <input class="input100" type="text" name="doctorName" placeholder="Doctor Name">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your registration year">
+                        <input class="input100" type="text" name="doctorYearReg" placeholder="Registration Year">
                         <span class="focus-input100"></span>
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate="Please enter your dob">
-                        <input class="input100" type="date" name="dob" placeholder="DOB">
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your state medical council">
+                        <input class="input100" type="text" name="stateMedicalCouncil" placeholder="State medical council">
                         <span class="focus-input100"></span>
                     </div>
                     <div class="wrap-input100 validate-input" data-validate="Please enter your gender">
-                        <input class="input100" type="text" name="gender" placeholder="Gender">
-                        <span class="focus-input100"></span>
-                    </div>
-                    <div class="wrap-input100 validate-input" data-validate="Please enter your address">
-                        <input class="input100" type="text" name="address" placeholder="Address">
+                        <input class="input100" type="text" name="doctorGender" placeholder="Gender">
                         <span class="focus-input100"></span>
                     </div>
                     <div class="wrap-input100 validate-input" data-validate="Please enter your phone number">
-                        <input class="input100" type="number" name="pnum" placeholder="Phone">
+                        <input class="input100" type="text" name="doctorPnum" placeholder="Phone">
                         <span class="focus-input100"></span>
                     </div>
 
@@ -90,17 +88,6 @@
 
         {{!-- scripts --}}
         {{>scripts}}
-
-        <script>
-            var vid = document.getElementById("myvideo");
-            vid.playbackRate = 0.5;
-
-            window.dataLayer = window.dataLayer || [];
-            function gtag() { dataLayer.push(arguments); }
-            gtag('js', new Date());
-
-            gtag('config', 'UA-23581568-13');
-        </script>
 
 </body>
 

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>About</title>
+
+    {{>dashboard-hospital-styles}}
+    <link rel="stylesheet" href="../../public/dashboard/css/custom.css">
+
+</head>
+
+<body class="animsition">
+    <div class="page-wrapper">
+
+        <!-- MENU SIDEBAR-->
+        {{>dashboard-hospital-sidebar}}
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            {{>dashboard-hospital-header}}
+            <!-- END HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <!-- USER DATA-->
+                                <div class="user-data m-b-30">
+                                    <h3 class="title-3 m-b-30">
+                                        <i class="zmdi zmdi-account-calendar"></i>hospital data</h3>
+                                    <div class="table-responsive table-data">
+                                        <table class="table">
+                                            <tbody>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>Reg no: </h3>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>{{_id}}</h3>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>Name: </h3>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>{{hospitalName}}</h3>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>Accrediation: </h3>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>{{hospitalAccrediation}}</h3>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>Address </h3>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>{{hospitalAddress}}</h3>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                                <tr>
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>Phone: </h3>
+                                                        </div>
+                                                    </td>
+
+                                                    <td>
+                                                        <div class="table-data__info">
+                                                            <h3>{{hospitalPnum}}</h3>
+                                                        </div>
+                                                    </td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <!-- END USER DATA-->
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2020 MedFork All rights reserved.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{>dashboard-hospital-scripts}}
+
+</body>
+
+</html>
+<!-- end document-->

@@ -17,6 +17,30 @@
         .height-200 {
             height: 200px;
         }
+
+        .header__navbar ul li a {
+            color: #000 !important;
+        }
+
+
+        .overview__inner i {
+            font-size: 30px !important;
+            position: relative;
+            top: -30px;
+        }
+
+        .overview__inner h2 {
+            padding-left: 10px !important;
+            font-size: 30px !important;
+        }
+
+        .overview__inner h2:first-child {
+            font-size: 30px !important;
+            padding-left: 0px !important;
+            position: relative;
+            left: 12px;
+            padding-left: 0px;
+        }
     </style>
 
 </head>
@@ -24,42 +48,42 @@
 <body class="animsition">
     <div class="page-wrapper">
         <!-- HEADER DESKTOP-->
-        <header class="header-desktop3 d-none d-lg-block">
+        <header class="header-desktop3 d-none d-lg-block" style=" background-color: #fff;">
             <div class="section__content section__content--p35">
                 <div class="header3-wrap">
                     <div class="header__logo">
                         <a href="/">
-                            <img src="../../public/img/logo-white.png" alt="medfork" style="max-width: 230px;"/>
+                            <img src="../../public/img/logo.png" alt="medfork" style="max-width: 230px;" />
                         </a>
                     </div>
                     <div class="header__navbar" style="top: 20px;">
                         <ul class="list-unstyled">
                             <li class="has-sub">
-                                <a href="http://127.0.0.1:8081/dashboard-patient/">
+                                <a href="http://127.0.0.1:8081/dashboard-hospital/">
                                     <i class="fas fa-tachometer-alt"></i>Dashboard
                                     <span class="bot-line"></span>
                                 </a>
                             </li>
                             <li>
-                                <a href="http://127.0.0.1:8081/dashboard-patient/about">
+                                <a href="http://127.0.0.1:8081/dashboard-hospital/about">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                     <span class="bot-line"></span>About
                                 </a>
                             </li>
                             <li>
-                                <a href="http://127.0.0.1:8081/dashboard-patient/prescription">
+                                <a href="http://127.0.0.1:8081/dashboard-hospital/doctor-registration">
                                     <i class="fa fa-list" aria-hidden="true"></i>
-                                    <span class="bot-line"></span>Prescription</a>
+                                    <span class="bot-line"></span>Doctor Registration</a>
                             </li>
                             <li>
-                                <a href="http://127.0.0.1:8081/dashboard-patient/appoinment">
+                                <a href="http://127.0.0.1:8081/dashboard-hospital/doctor-list">
                                     <i class="fa fa-calendar-o" aria-hidden="true"></i>
-                                    <span class="bot-line"></span>Appoinments</a>
+                                    <span class="bot-line"></span>Doctor List</a>
                             </li>
                             <li>
-                                <a href="http://127.0.0.1:8081/dashboard-patient/contact-us">
-                                    <i class="fa fa-phone" aria-hidden="true"></i>
-                                    <span class="bot-line"></span>Contact Us</a>
+                                <a href="http://127.0.0.1:8081/dashboard-hospital/patient-list">
+                                    <i class="fa fa-share-alt" aria-hidden="true"></i>
+                                    <span class="bot-line"></span>Patient List</a>
                             </li>
 
                         </ul>
@@ -71,7 +95,7 @@
                                     <img src="../../public/dashboard/images/icon/user.png" alt="user" />
                                 </div>
                                 <div class="content">
-                                    <a class="js-acc-btn" href="#">{{patientName}}</a>
+                                    <a class="js-acc-btn" style="color: #000;" href="#">{{hospitalName}}</a>
                                 </div>
                                 <div class="account-dropdown js-dropdown">
                                     <div class="info clearfix">
@@ -82,27 +106,19 @@
                                         </div>
                                         <div class="content">
                                             <h5 class="name">
-                                                <a href="#">{{patientName}}</a>
+                                                <a href="#">{{hospitalName}}</a>
                                             </h5>
-                                            <span class="email">{{patientEmail}}</span>
+                                            <span class="email">{{hospitalRegNo}}</span>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__body">
                                         <div class="account-dropdown__item">
-                                            <a href="#">
+                                            <a href="about">
                                                 <i class="zmdi zmdi-account"></i>Account</a>
-                                        </div>
-                                        <div class="account-dropdown__item">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-settings"></i>Setting</a>
-                                        </div>
-                                        <div class="account-dropdown__item">
-                                            <a href="#">
-                                                <i class="zmdi zmdi-money-box"></i>Billing</a>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__footer">
-                                        <a href="/patient-login">
+                                        <a href="/">
                                             <i class="zmdi zmdi-power"></i>Logout</a>
                                     </div>
                                 </div>
@@ -168,81 +184,80 @@
             <section class="statistic statistic2">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-6 col-lg-4">
+                        <div class="col-sm-6 col-lg-3">
                             <div class="overview-item overview-item--c1" id="about-btn">
-                                <a href="/dashboard-patient/about">
+                                <a href="/dashboard-hospital/about">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="zmdi zmdi-account-o"></i>
+                                                <i class="zmdi zmdi-account-o" style="top: -3px;"></i>
                                             </div>
                                             <div class="text">
                                                 <h2>About</h2>
                                             </div>
                                         </div>
                                         <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
                                         </div>
                                     </div>
                                 </a>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-4">
+                        <div class="col-sm-6 col-lg-3">
                             <div class="overview-item overview-item--c2" id="prescription-btn">
-                                <a href="/dashboard-hospital/key-generation">
+                                <a href="/dashboard-hospital/doctor-registration">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
                                                 <i class="fa fa-list" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>Patient Registration</h2>
+                                                <div class="text">
+                                                    <h2>Doctor</h2>
+                                                    <h2>Registration</h2>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
+                                        <div class="overview-chart" style="position: relative; height: 82px;">
                                         </div>
                                     </div>
                                 </a>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-4">
+                        <div class="col-sm-6 col-lg-3">
                             <div class="overview-item overview-item--c3" id="appoinment-btn">
-                                <a href="/dashboard-patient/appoinment">
-
+                                <a href="/dashboard-hospital/doctor-list">
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="zmdi zmdi-calendar-note"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2></h2>
-                                                <span></span>
+                                                <i class="fa fa-medkit" aria-hidden="true"
+                                                    style="position: relative; top: -32px;"> </i>
+                                                <div class="text">
+                                                    <h2>Doctor</h2>
+                                                    <h2>List</h2>
+                                                    <span></span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
+                                        <div class="overview-chart" style="position: relative; height: 82px;">
                                         </div>
                                     </div>
                                 </a>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-4">
+                        <div class="col-sm-6 col-lg-3">
                             <div class="overview-item overview-item--c4" id="other-details-btn">
-                                <a href="/dashboard-patient/other-details">
+                                <a href="/dashboard-hospital/share-request">
 
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>Other Details</h2>
-                                                <span>t</span>
+                                                <i class="fa fa-user" aria-hidden="true"></i>
+                                                <div class="text">
+                                                    <h2>Patient</h2>
+                                                    <h2>List</h2>
+                                                    <span></span>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
+                                        <div class="overview-chart" style="position: relative; height: 82px;">
                                         </div>
                                     </div>
                                 </a>
@@ -254,11 +269,11 @@
             <!-- END GENERAL SECTION-->
 
             <!-- WELCOME-->
-            <section class="welcome p-t-10">
+            {{!-- <section class="welcome p-t-10">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h1 class="title-4">Patient Records
+                            <h1 class="title-4">Doctor Records
                             </h1>
                             <hr class="line-seprate">
                         </div>
@@ -272,205 +287,52 @@
             <section class="statistic statistic2">
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="overview-item overview-item--c1 height-200">
-                                <a href="/dashboard-patient/hospital">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="overview-item overview-item--c1 height-200" style="height: 175px">
+                                <a href="/dashboard-hospital/hospital">
 
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="fa fa-hospital-o" aria-hidden="true"></i>
+                                                <i class="fa fa-hospital-o" aria-hidden="true" style="top: -3px"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>Add</h2>
+                                                <h2 >Add</h2>
                                             </div>
                                         </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
+                                        <div class="overview-chart" style="position: relative; height: 82px;">
                                         </div>
                                     </div>
                                 </a>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="overview-item overview-item--c2 height-200">
-                                <a href="/dashboard-patient/clinic">
+                        <div class="col-sm-6 col-lg-3">
+                            <div class="overview-item overview-item--c2 height-200" style="height: 175px">
+                                <a href="/dashboard-hospital/clinic">
 
                                     <div class="overview__inner">
                                         <div class="overview-box clearfix">
                                             <div class="icon">
-                                                <i class="fa fa-plus-square" aria-hidden="true"></i>
+                                                <i class="fa fa-plus-square" aria-hidden="true" style="top: -3px"></i>
                                             </div>
                                             <div class="text">
-                                                <h2>Update</h2>
+                                                <h2 style="top: -3px">Remove</h2>
                                             </div>
                                         </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
+                                        <div class="overview-chart" style="position: relative; height: 82px;">
                                         </div>
                                     </div>
                                 </a>
                             </div>
                         </div>
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="overview-item overview-item--c3 height-200">
-                                <a href="/dashboard-patient/pharmacy">
-
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="fa fa-medkit" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>History</h2>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        {{!-- <div class="col-sm-6 col-lg-4">
-                            <div class="overview-item overview-item--c4 height-200">
-                                <a href="/dashboard-patient/laboratory">
-
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="fa fa-flask" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>Laboratory</h2>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div> --}}
                     </div>
                 </div>
-            </section>
+            </section> --}}
 
             <!-- END PREVIOUS MEDICAL RECORDS SECTION -->
 
-            <!-- WELCOME-->
-            <section class="welcome p-t-10">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <h1 class="title-4">Medical Records
-                            </h1>
-                            <hr class="line-seprate">
-                        </div>
-                    </div>
-                </div>
-            </section>
-            <!-- END WELCOME-->
-
-            <!-- PREVIOUS RECORDS SECTION -->
-
-            <section class="statistic statistic2">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="overview-item overview-item--c1 height-200">
-                                <a href="/dashboard-patient/prescription">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="fa fa-list" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>Add</h2>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart1"></canvas>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="overview-item overview-item--c2 height-200">
-                                <a href="/dashboard-patient/diabetes-report">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <img src="../../public/dashboard/images/diabetes.png" alt="" srcset=""
-                                                    style="max-width: 15%;
-                                                            width: 260px;
-                                                            position: relative;
-                                                            top: -21px;
-                                                            margin-right: 15px;">
-                                                <div class="text">
-                                                    <h2>Update</h2>
-                                                    {{!-- <h2>Reports</h2> --}}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart2"></canvas>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-lg-4">
-                            <div class="overview-item overview-item--c3 height-200">
-                                <a href="/dashboard-patient/bp-report">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <img src="../../public/dashboard/images/bp.png" alt="" srcset="" style="max-width:25%;"
-                                                >                                                <div class="text">
-                                                    <h2>History</h2>
-                                                    <span></span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart3"></canvas>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        {{!-- <div class="col-sm-6 col-lg-4">
-                            <div class="overview-item overview-item--c4 height-200">
-                                <a href="/dashboard-patient/other-reports">
-                                    <div class="overview__inner">
-                                        <div class="overview-box clearfix">
-                                            <div class="icon">
-                                                <i class="fa fa-info-circle" aria-hidden="true"></i>
-                                            </div>
-                                            <div class="text">
-                                                <h2>Other Reports</h2>
-                                                <span></span>
-                                            </div>
-                                        </div>
-                                        <div class="overview-chart">
-                                            <canvas id="widgetChart4"></canvas>
-                                        </div>
-                                    </div>
-                                </a>
-                            </div>
-                        </div> --}}
-                    </div>
-                </div>
-            </section>
-
-            <!-- END PREVIOUS SECTION -->
-
             <!-- DATA TABLE-->
-            <section class="p-t-20">
+            {{!-- <section class="p-t-20">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
@@ -691,7 +553,7 @@
                     </div>
                 </div>
             </section>
-            <!-- END DATA TABLE-->
+            <!-- END DATA TABLE--> --}}
 
             <!-- COPYRIGHT-->
             <section class="p-t-60 p-b-20">
@@ -699,8 +561,7 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="copyright">
-                                <p>Copyright © 2018 Colorlib. All rights reserved. Template by <a
-                                        href="MedFork inc">Colorlib</a>.</p>
+                                <p>Copyright © 2020 MedFork All rights reserved. .</p>
                             </div>
                         </div>
                     </div>
