@@ -2,36 +2,84 @@
 <html lang="en">
 
 <head>
-    <!-- Required meta tags-->
+
     <meta http-equiv='cache-control' content='no-cache'>
     <meta http-equiv='expires' content='0'>
     <meta http-equiv='pragma' content='no-cache'>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Colorlib Templates">
-    <meta name="author" content="Colorlib">
-    <meta name="keywords" content="Colorlib Templates">
+    <meta name="description" content="colorlib Templates">
+    <meta name="author" content="colorlib">
+    <meta name="keywords" content="colorlib Templates">
 
-    <!-- Title Page-->
-    <title>Full Chain</title>
-    <link rel="icon" href="../static/img/favicon.png">
 
-    <!-- Icons font CSS-->
-    <link href="../static/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-    <link href="../static/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+    <title>Transactions Info</title>
+    <link rel="icon" href="../../public/img/favicon.png">
 
-    <!-- Font special for pages-->
+
+
+
+    <link href="../../public/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="../../public/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i"
         rel="stylesheet">
 
-    <!-- Vendor CSS-->
-    <link href="../static/vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="../static/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
 
-    <!-- Main CSS-->
-    <link href="../static/css/main.css" rel="stylesheet" media="all">
+    <link href="../../public/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="../../public/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+
+    <link href="../../public/css/main.css" rel="stylesheet" media="all">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500&family=Recursive&display=swap');
+    </style>
 
     {{>styles}}
+
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="../../public/table/images/icons/favicon.ico" />
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../../public/table/vendor/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../../public/table/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../../public/table/vendor/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../../public/table/vendor/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../../public/table/vendor/perfect-scrollbar/perfect-scrollbar.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="../../public/table/css/util.css">
+    <link rel="stylesheet" type="text/css" href="../../public/table/css/main.css">
+    <!--===============================================================================================-->
+    <link href="../../public/css/table.css" rel="stylesheet" media="all">
+    </link>
+    <style>
+
+        tr,
+        thead,
+        tbody {
+            display: inline-block;
+        }
+
+        thead {
+            width: 20%;
+        }
+
+        tbody {
+            width: 80%;
+        }
+        .wrap-table100 {
+            position: relative;
+            left: -82px;
+            top: -50px;
+        }
+        .table100-head {
+            padding: 10px;
+        }
+
+    </style>
 </head>
 
 <body>
@@ -39,56 +87,317 @@
         {{>navbar}}
 
         <div class="page-wrapper bg-gra-03 p-t-45 p-b-50">
-            <div class="wrapper wrapper--w790" style="max-width:900px;">
+            <div class="wrapper wrapper--w790" style="max-width:1300px;">
                 <div class="card card-5">
-                    <div class="card-heading">
-                        <h2 class="title">FULL Chain</h2>
-                    </div>
+                    <div class="container" style="padding: 0 70px; padding-bottom: 20px;">
+                        <h2 style="font-family: 'Noto Sans JP', sans-serif; padding: 15px 0;">Block Explorer</h2>
 
-                    <div class="container">
-                        <div class="table-responsive" style="padding-bottom: 200px;">
-                            <table class="table table-striped" id="table">
-                                <tr>
-                                    <th>Digital Sign Doctor:</th>
-                                    <th>Digital SignPatient</th>
-                                    <th>Public Key Doctor</th>
-                                    <th>public Key Patient</th>
-                                    <th>time</th>
-                                    <th>modification</th>
-                                    <th>ipfs File Hash</th>
-                                    <th>capsule</th>
-                                    <th>patient</th>
-                                </tr>
-                                {{#each transaction}}
-                                    <tr>
-                                        <td>{{this.digitalSignDoctor}}</td>
-                                        <td>{{this.digitalSignPatient}}</td>
-                                        <td>{{this.publicKeyDoctor}}</td>
-                                        <td>{{this.publicKeyPatient}}</td>
-                                        <td>{{this.time}}</td>
-                                        <td>{{this.modification}}</td>
-                                        <td>{{this.ipfsFileHash}}</td>
-                                        <td>{{this.capsule}}</td>
-                                        <td>{{this.patient}}</td>
-                                    </tr>
-                                {{/each}}
-                            </table>
+                        <div class="wrap-table100">
+                            <div class="table100">
 
+                            {{#each transaction}}
+
+                                {{#if normal}}
+
+                                    <table>
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Digital Sign Doctor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.digitalSignDoctor}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Digital Sign Patient</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.digitalSignPatient}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Public Key Doctor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.publicKeyDoctor}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Public Key Patient</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.publicKeyPatient}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Timestamp</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.time}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Modification</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.modification}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Ipfs File Hash</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.ipfsFileHash}}</td>
+                                            </tr>
+                                        </tbody>
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Capsule</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.capsule}}</td>
+                                            </tr>
+                                        </tbody>
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Patient</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.patient}}</td>
+                                            </tr>
+                                        </tbody>
+                                        <br><br><br>
+                                    </table>
+
+                                {{else}}
+
+                                    {{#if remove}}
+
+                                    <table>
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Transaction Type</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.transactionType}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Sender ID</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.senderUID}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Reciever ID</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.receiverUID}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Data Hash</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.dataHash}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Remove</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.remove}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.time}}</td>
+                                            </tr>
+                                        </tbody>
+
+                                        <br><br><br>
+                                    </table>
+
+                                    {{else}}
+
+                                    <table>
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Transaction Type</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.transactionType}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Sender ID</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.senderUID}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Reciever ID</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.receiverUID}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Data Hash</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.dataHash}}</td>
+                                            </tr>
+                                        </tbody>
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Capsule</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.capsule}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Remove</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.remove}}</td>
+                                            </tr>
+                                        </tbody>
+
+
+                                        <thead>
+                                            <tr class="table100-head">
+                                                <th class="column1">Time</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="column1">{{this.time}}</td>
+                                            </tr>
+                                        </tbody>
+
+                                        <br><br><br>
+                                    </table>
+
+                                    {{/if}}
+
+                                {{/if}}
+
+                            {{/each}}
+
+                            <br><br><br><br>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
 
 
+    <script src="../../public/vendor/jquery/jquery.min.js"></script>
 
+    <script src="../../public/vendor/select2/select2.min.js"></script>
+    <script src="../../public/vendor/datepicker/moment.min.js"></script>
+    <script src="../../public/vendor/datepicker/daterangepicker.js"></script>
 
-
-    {{>scripts}}
+    <script src="../../public/js/global.js"></script>
     {{!-- Modal js --}}
 </body>
 
 </html>
-<!-- end document-->
