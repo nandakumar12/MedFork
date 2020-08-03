@@ -11,6 +11,8 @@ const model = require("../../schemas/transaction-model");
 
 const { promisify } = require("util");
 const readFile = promisify(fs.readFile);
+const writeFile = promisify(fs.writeFile);
+
 const { deepParseJson } = require("deep-parse-json");
 
 const initiateTransaction = require("../../inititate-transaction");
@@ -45,6 +47,7 @@ const getHospitalRoute = (blockchain) => {
   const router = express.Router();
 
   let doctorDetails;
+  let sharedRecords;
 
   router.post("/", async (req, res) => {
     // Login credentials verify
@@ -58,9 +61,9 @@ const getHospitalRoute = (blockchain) => {
       }
     );
 
-    if(!isValidSignature.data.status){
+    if (!isValidSignature.data.status) {
       res.redirect(`/signature-check-doctor&valid=${false}`);
-    } 
+    }
 
     console.log("signature validity -> ", isValidSignature);
 
@@ -178,99 +181,93 @@ const getHospitalRoute = (blockchain) => {
     for (const file of req.files) {
       patientMedicalReport.push(readFile(`./reports/${file.filename}`));
     }
-    Promise.all(patientMedicalReport)
-      .then((resArr) => {
-        console.log("The final report is :");
-        const medicalReportData = [];
-        resArr.forEach((fileContent) => {
-          console.log("Single content", JSON.parse(fileContent.toString()));
-          medicalReportData.push(JSON.parse(fileContent.toString()));
-        }); //deepParseJson
-        console.log(medicalReportData);
+    Promise.all(patientMedicalReport).then((resArr) => {
+      console.log("The final report is :");
+      const medicalReportData = [];
+      resArr.forEach((fileContent) => {
+        console.log("Single content", JSON.parse(fileContent.toString()));
+        medicalReportData.push(JSON.parse(fileContent.toString()));
+      }); //deepParseJson
+      console.log(medicalReportData);
 
-        const prescriptionDetails = [];
-        medicalReportData[1].prescription.forEach((el) => {
-          prescriptionDetails.push(el);
-        });
+      const prescriptionDetails = [];
+      medicalReportData[1].prescription.forEach((el) => {
+        prescriptionDetails.push(el);
+      });
 
-        const fullMedicalData = {
-          duid,
-          diabetesLevel: [
-            {
-              beforeFasting: medicalReportData[2].sugarData.beforeFasting,
-              afterFasting: medicalReportData[2].sugarData.afterFasting,
-            },
-          ],
-          bpLevel: medicalReportData[0].bpData,
-          prescriptionDetails,
-          otherDetails,
-          hospitalRegNo: medicalReportData[0].hospitalRegNo,
-          hospitalName: medicalReportData[0].hospitalName,
-          date: new Date().toDateString(),
-        };
+      const fullMedicalData = {
+        duid,
+        diabetesLevel: [
+          {
+            beforeFasting: medicalReportData[0].sugarData.beforeFasting,
+            afterFasting: medicalReportData[0].sugarData.afterFasting,
+          },
+        ],
+        bpLevel: medicalReportData[2].bpData,
+        prescriptionDetails,
+        otherDetails,
+        hospitalRegNo: medicalReportData[0].hospitalRegNo,
+        hospitalName: medicalReportData[0].hospitalName,
+        date: new Date().toDateString(),
+      };
 
-        console.log("The builded medical report", fullMedicalData);
+      console.log("The builded medical report", fullMedicalData);
 
-        if (status == "exist2") {
-          new MedicalDetials({
-            _id: uuid,
-            furtherDetails: [fullMedicalData],
-          })
+      if (status == "exist2") {
+        new MedicalDetials({
+          _id: uuid,
+          furtherDetails: [fullMedicalData],
+        })
+          .save()
+          .then()
+          .catch((err) => {
+            console.log(err + "error occured in saving medical details");
+          });
+      } else if (status == "exist1") {
+        MedicalDetials.findById(uuid, (err, patient) => {
+          patient.furtherDetails.push(fullMedicalData);
+          patient
             .save()
-            .then()
+            .then(() => {
+              console.log(
+                "database updated with new medical records successfully"
+              );
+            })
             .catch((err) => {
               console.log(err + "error occured in saving medical details");
             });
-        } else if (status == "exist1") {
-          MedicalDetials.findById(uuid, (err, patient) => {
-            patient.furtherDetails.push(fullMedicalData);
-            patient
-              .save()
-              .then(() => {
-                console.log(
-                  "database updated with new medical records successfully"
-                );
-              })
-              .catch((err) => {
-                console.log(err + "error occured in saving medical details");
-              });
-          });
-        }
+        });
+      }
 
-        const medicalDetails = {
-          _id: uuid,
-          duid: fullMedicalData.duid,
-          diabetesLevel: fullMedicalData.diabetesLevel,
-          bpLevel: fullMedicalData.bpLevel,
-          prescriptionDetails: fullMedicalData.prescriptionDetails,
-          otherDetails: fullMedicalData.otherDetails,
-          hospitalRegNo: fullMedicalData.hospitalName,
-          hospitalName: fullMedicalData.hospitalName,
-          date: fullMedicalData.date,
-        };
-        fs.writeFile(
-          path.join(
-            __dirname,
-            "../../../encrypted-files",
-            `${uuid}-medical-report.json`
-          ),
-          JSON.stringify(medicalDetails),
-          (err, data) => {
-            if (err) {
-              console.log("Error while writing medical report");
-              return;
-            }
-            console.log("The medical data is generated");
-          }
-        );
-      })
-      .catch((err) => {
-        console.log("Error while parsing the medical record", err);
-      });
+      const medicalDetails = {
+        _id: uuid,
+        duid: fullMedicalData.duid,
+        diabetesLevel: fullMedicalData.diabetesLevel,
+        bpLevel: fullMedicalData.bpLevel,
+        prescriptionDetails: fullMedicalData.prescriptionDetails,
+        otherDetails: fullMedicalData.otherDetails,
+        hospitalRegNo: fullMedicalData.hospitalName,
+        hospitalName: fullMedicalData.hospitalName,
+        date: fullMedicalData.date,
+      };
+      writeFile(
+        path.join(
+          __dirname,
+          "../../../encrypted-files",
+          `${uuid}-medical-report.json`
+        ),
+        JSON.stringify(medicalDetails)
+      )
+        .then((res) => {
+          console.log("The medical data is generated");
+          console.log("Initiated new transaction");
+          initiateTransaction(uuid, duid, blockchain);
+        })
+        .catch((err) => {
+          console.log("Error while parsing the medical record", err);
+        });
+    });
 
-    console.log("Initiated new transaction");
-
-    initiateTransaction(uuid, duid, blockchain);
     const response = {
       message: "Transaction will be added to The Blockchain",
     };
@@ -286,7 +283,7 @@ const getHospitalRoute = (blockchain) => {
     });
   });
 
-  router.post("/data-processing", (req, res) => {
+  router.post("/shared-records", (req, res) => {
     const patientUID = req.body.patient_uuid;
     const doctorUID = req.body.doctor_uuid;
     const dataHash = req.body.data_hash;
@@ -295,41 +292,47 @@ const getHospitalRoute = (blockchain) => {
     for (let blockNo = blockchain.chain.length - 1; blockNo >= 0; blockNo--) {
       console.log(blockchain.chain);
       const transactions = blockchain.chain[blockNo].transactions;
-      for(let idx = 0 ; idx < transactions.length ; idx++){
+      for (let idx = 0; idx < transactions.length; idx++) {
         if (transactions[idx].transactionType == "policy") {
-          const currentTransaction = blockchain.chain[blockNo].transactions[idx];
+          const currentTransaction =
+            blockchain.chain[blockNo].transactions[idx];
           if (
-            currentTransaction.senderUID == patientUID && 
-            currentTransaction.receiverUID == doctorUID && 
-            currentTransaction.dataHash == dataHash && 
+            currentTransaction.senderUID == patientUID &&
+            currentTransaction.receiverUID == doctorUID &&
+            currentTransaction.dataHash == dataHash &&
             currentTransaction.remove == true
           ) {
             res.render("dashboard-doctor/shared-data", {
               error: "Patient revoked access!!",
             });
             return console.log("Sorry the paient has revoked access");
+          }
         }
       }
     }
-  }
-    
 
-    axios
-      .post("http://127.0.0.1:8099/reEncrypt", {
+    axios.post("http://127.0.0.1:8099/reEncrypt", {
         s_uid: patientUID,
         r_uid: doctorUID,
         public_key_digitalsign: dataHash,
       })
-      .then((res) => {
+      .then((result) => {
         console.log("result -> ", res);
-        if (res.data.status == "success") {
-          console.log(
-            "responce from datasharing -> ",
-            res.data.decryptedMessage
-          );
+        if (result.data.status == "success") {
+          console.log("responce from datasharing -> ",result.data.decryptedMessage);
+          sharedRecords = deepParseJson(result.data.decryptedMessage);
+          res.render("dashboard-doctor/shared-reports", {
+            uid: sharedRecords._id,
+            duid: sharedRecords.duid,
+            diabetesLevel: sharedRecords.diabetesLevel,
+            bpLevel: sharedRecords.bpLevel,
+            prescriptionDetails: sharedRecords.prescriptionDetails,
+            hospitalName: sharedRecords.hospitalName,
+            date: sharedRecords.date
+          });
+          return ;
         }
       });
-    res.render("loader/doctor-loader");
   });
 
   return router;
