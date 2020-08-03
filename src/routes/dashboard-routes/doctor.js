@@ -12,6 +12,8 @@ const model = require("../../schemas/transaction-model");
 
 const { promisify } = require("util");
 const readFile = promisify(fs.readFile);
+const writeFile = promisify(fs.writeFile);
+
 const { deepParseJson } = require("deep-parse-json");
 
 const initiateTransaction = require("../../inititate-transaction");
@@ -45,6 +47,7 @@ const getHospitalRoute = (blockchain) => {
   
   let hospitalDetails;
   let doctorDetails;
+  let sharedRecords;
 
   router.post("/", async (req,res) => {
     await HospitalRegistrationDetails.findOne(

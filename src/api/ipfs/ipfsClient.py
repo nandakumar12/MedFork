@@ -5,6 +5,8 @@ import chalk
 from flask import Flask, jsonify, request
 
 
+ENCRYPTED_FILES_PATH = os.path.join(CURRENT_FILE, '../../../encrypted-files')
+
 app = Flask(__name__)
 
 @app.route("/ipfs/addFile")
@@ -14,7 +16,7 @@ def addFile():
     print("IPFS connection:")
     with ipfshttpclient.connect() as client:
         print("uploading.... to ipfs",end='\n')
-        hash = client.add("../../../encrypted-files/"+filename)['Hash']
+        hash = client.add(f"{ENCRYPTED_FILES_PATH}/{filename}")['Hash']
         print("hash of the file : "+hash,end='\n')
     return jsonify({"status":"success","hash":hash})
 

@@ -32,16 +32,16 @@ const transactionSchema = new Schema({
     trim: true,
   },
 
-  modification: {
-    type: String,
-    required: true,
-    trim: true,
-  },
-
   ipfsFileHash: {
     type: String,
     required: true,
   },
+
+  duid:{
+    type:String, 
+    require:true,
+  },
+  
   capsule: {
     type: String,
     required: true,
