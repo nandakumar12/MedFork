@@ -1,5 +1,6 @@
 const { Kafka } = require("kafkajs");
 const axios = require("axios");
+const sizeof = require('object-sizeof')
 
 let currentTransactions = [];
 
@@ -31,18 +32,33 @@ run().catch((e) => console.error(`[example/consumer] ${e.message}`, e));
 
 const blockBuilder = () => {
   console.log("Orderer waiting for Transaction")
-  if (currentTransactions.length != 0) {
+  if (currentTransactions.length != 0 && currentTransactions.length<7518) {
     const blockTransactions = {
       timestamp: Date.now(),
       transactions: JSON.stringify(currentTransactions),
     };
     console.log("The transaction inside orderer", currentTransactions);
+    console.log("size of a single transaction->",sizeof(currentTransactions[0]));
     axios.post("http://127.0.0.1:9050/produce/block", {
       id: "435",
       messageData: JSON.stringify(blockTransactions),
       senderName: "sdfsdf",
     });
     currentTransactions=[]
+  }
+  else if( currentTransactions.length>=7518){
+    const blockTransactions = {
+      timestamp: Date.now(),
+      transactions: JSON.stringify(currentTransactions.splice(0,7518)),
+    };
+    console.log("The transaction inside orderer", currentTransactions);
+    console.log("size of a single transaction->",sizeof(currentTransactions[0]));
+    axios.post("http://127.0.0.1:9050/produce/block", {
+      id: "435",
+      messageData: JSON.stringify(blockTransactions),
+      senderName: "sdfsdf",
+    });
+
   }
 };
 
