@@ -14,6 +14,7 @@ const getPatientRoute = (blockchain, merkleTree) => {
   let patientDetails;
   let medicalDetails;
   let patientUUID;
+  let remove;
 
   router.post("/", async (req, res) => {
     // Login credentials verify
@@ -158,8 +159,8 @@ const getPatientRoute = (blockchain, merkleTree) => {
   });
 
   router.post("/patient", async (req, res) => {
-    let remove = 0;
-    if (req.body.exist === "add") {
+
+    if (req.body.exist == "add") {
       remove = 0;
     } else {
       remove = 1;
@@ -315,4 +316,7 @@ const getPatientRoute = (blockchain, merkleTree) => {
   return router;
 };
 
-module.exports = getPatientRoute;
+module.exports = {
+  getPatientRoute,
+  remove
+}

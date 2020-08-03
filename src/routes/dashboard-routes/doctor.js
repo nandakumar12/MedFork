@@ -43,7 +43,7 @@ const upload = multer({
   storage,
 });
 
-const getHospitalRoute = (blockchain) => {
+const getHospitalRoute = (blockchain, remove) => {
   const router = express.Router();
 
   let doctorDetails;
@@ -289,7 +289,13 @@ const getHospitalRoute = (blockchain) => {
     const dataHash = req.body.data_hash;
     console.log("-> ", patientUID, doctorUID, dataHash);
 
-
+    if (remove == 0) {
+      res.render("dashboard-doctor/shared-reports");
+    } else {
+      res.render("dashboard-doctor/shared-data", {
+        error: "Patient revoked access!!",
+      });
+    }
 
     // for (let blockNo = blockchain.chain.length - 1; blockNo >= 0; blockNo--) {
     //   console.log(blockchain.chain);
@@ -335,8 +341,6 @@ const getHospitalRoute = (blockchain) => {
     //       return ;
     //     }
     //   });
-    
-    res.render("dashboard-doctor/shared-reports");
   });
 
   return router;

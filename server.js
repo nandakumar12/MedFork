@@ -10,7 +10,8 @@ const blockConsumerKafka = require("./src/kafka-block-consumer/kafka-block-consu
 const Blockchain = require("./src/blockchain");
 const blockchainRoutes = require("./src/routes/blockchain-routes");
 const mainRoutes = require("./src/routes/main-routes");
-const patientDashboardRoutes = require("./src/routes/dashboard-routes/patient");
+const { patientDashboardRoutes } = require("./src/routes/dashboard-routes/patient");
+const { remove } = require("./src/routes/dashboard-routes/patient");
 const hospitalDashboardRoutes = require("./src/routes/dashboard-routes/hospital");
 const doctorDashboardRoutes = require("./src/routes/dashboard-routes/doctor");
 const MerkleTrees = require("./src/merkle-tree");
@@ -26,7 +27,7 @@ const merkleTree = new MerkleTrees();
 const blockchainRoute = blockchainRoutes(blockchain);
 const hospitalDashboardRoute = hospitalDashboardRoutes(blockchain);
 const patientDashboardRoute = patientDashboardRoutes(blockchain, merkleTree);
-const doctorDashboardRoute = doctorDashboardRoutes(blockchain, merkleTree);
+const doctorDashboardRoute = doctorDashboardRoutes(blockchain, merkleTree, remove);
 const mainRoute = mainRoutes(blockchain);
 blockConsumerKafka(blockchain);
 
