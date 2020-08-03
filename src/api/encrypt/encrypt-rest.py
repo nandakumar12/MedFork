@@ -104,45 +104,54 @@ def decrypt_file():
     with open(f"{filename}_orig","wb") as file:
         file.write(original_data)
     return {"decryption":"success"}
-
+    
 
 @app.route("/digital-sign")
-def digital_sign():
+def digital_sign(): #uid, text_data=None, filename=None
     uid = request.args.get('uid')
+    print(uid)
     filename = request.args.get('filepath')
-    #text_data = request.get_json()["text_data"]
+    text_data = request.args.get("text_data")
     print("Signing the File")
-    with open(f"{ASSYMETRIC_KEY_PATH}/{uid}_private_key.pem", "rb") as key_file:
-        print(f"Reading private_key of {uid}")
-        private_key = key_file.read()
-        private_key = keys.UmbralPrivateKey.from_bytes(private_key)
-        print(private_key)
-    
+    try:
+        with open(f"{ASSYMETRIC_KEY_PATH}/{uid}_private_key.pem", "rb") as key_file:
+            print(f"Reading private_key of {uid}")
+            private_key = key_file.read()
+            private_key = keys.UmbralPrivateKey.from_bytes(private_key)
+            print(private_key)
+    except:
+        return jsonify({'status': False})
     if(filename):
         with open(f"{ENCRYPTED_FILES_PATH}/{filename}", 'rb') as f:
             data = f.read()
-    # if(text_data):
-    #     data = text_data.encode()
+    if(text_data):
+        data = text_data.encode()
     signature = signing.Signer(private_key)
+    print("the sign is ->",base64.b64encode(signature(data)).decode())
     return base64.b64encode(signature(data)).decode()
 
 
-@app.route("/verifiy-sign")
-def sign_verification():
-    uid = request.args.get('uuid')
-    filename = request.args.get('filename')
-    #text_data = request.get_json()["text_data"]
-    signature = request.get_json()["signature"]
-    signature = base64.b64decode(signature.encode())
-    with open(f"{ASSYMETRIC_KEY_PATH}/{uid}_public_key.pem", "rb") as key_file:
-        public_key = key_file.read()
-        public_key = keys.UmbralPublicKey.from_bytes(public_key)
-        print(public_key)
+@app.route("/verify-sign",methods=["POST"])
+def sign_verification(): #uid,signature,text_data=None, filename=None
+    uid = request.get_json()['uid']
+    print('uid ->',uid)
+    filename = None#request.get_json()['filepath']
+    text_data = request.get_json()['text_data']
+    signature = request.get_json()['signature']+"="
+    print('signature ->',signature)
+    try:
+        signature = base64.b64decode(signature.encode())
+        with open(f"{ASSYMETRIC_KEY_PATH}/{uid}_public_key.pem", "rb") as key_file:
+            public_key = key_file.read()
+            public_key = keys.UmbralPublicKey.from_bytes(public_key)
+            print(public_key)
+    except:
+        return jsonify({"status":False})
     if filename:
-        with open(filename, 'rb') as f:
+        with open(f"{ENCRYPTED_FILES_PATH}/{filename}", 'rb') as f:
             data = f.read()
-    # if text_data:
-    #     data = text_data.encode()
+    if text_data:
+        data = text_data.encode()
     signature = signing.Signature.from_bytes(signature, True)
     return {"status":signature.verify(data, public_key)}
 
@@ -156,3 +165,6 @@ decrypt_file("n12071","hello.txt",pre.Capsule.from_bytes(base64.b64decode(cap.en
 sign=digital_sign("100","sih.txt")
 print(sign,type(sign))
 print(sign_verification("100",base64.b64decode(sign.encode()),"sih.txt"))'''
+
+# print(digital_sign(34,text_data="hello"))
+# sign_verification(34,"MEQCIEkNAylUlHQcyI2h9dm7mYBikDNb9U3MjobqHPtxZN9IAiBmPTBBTOYzmBon93SGgnTG6eubC3cOqR9Vqez7hwA1DA==",text_data="hello")

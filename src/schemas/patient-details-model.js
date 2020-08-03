@@ -44,6 +44,12 @@ const patientDetailsSchema = mongoose.Schema({
     type: String,
     required: true,
     trim: true,
+  },
+
+  gender:{
+    type: String, 
+    required: true,
+    trim: true
   }
 });
 
