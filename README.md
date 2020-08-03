@@ -1,4 +1,4 @@
-![output-onlinepngtools](https://user-images.githubusercontent.com/17951801/89218387-90b47d80-d5eb-11ea-9378-9acfdf6ad0ee.png)
+<center>![output-onlinepngtools](https://user-images.githubusercontent.com/17951801/89218387-90b47d80-d5eb-11ea-9378-9acfdf6ad0ee.png)<center>
 
 # <center>MedFork - Blockchain based EHR<center>
 
