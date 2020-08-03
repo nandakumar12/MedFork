@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Applicant Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+    {{!-- styles --}}
+    {{>styles}}
+
+</head>
+
+<body>
+    <div class="main-body">
+        {{>navbar}}
+
+        <div class="container-contact100" style="padding: 70px; ">
+
+            <div class="contact100-map" id="google_map" data-map-x="40.722047" data-map-y="-73.986422"
+                data-pin="../../public/images/icons/map-marker.png" data-scrollwhell="0" data-draggable="1"></div>
+            {{!-- <div class="bg-video">
+                <video id="myvideo" class="bg-video__content" autoplay muted loop>
+                    <source src="../../public/img/video.mp4" type="video/mp4">
+                    <source src="../../public/img/video.webm" type="video/webm">
+                    Your browser is not supported!
+                </video>
+            </div> --}}
+
+
+
+            <div class="wrap-contact100">
+
+                <form class="contact100-form validate-form" method="POST" action="processing">
+                    <span class="contact100-form-title">
+                        Applicant Details
+                    </span>
+
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your uuid">
+                        <input class="input100" type="text" name="uuid" placeholder="UUID">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your ruid">
+                        <input class="input100" type="text" name="ruid" placeholder="RUID">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your name">
+                        <input class="input100" type="text" name="name" placeholder="Name">
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your dob">
+                        <input class="input100" type="date" name="dob" placeholder="DOB">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your gender">
+                        <input class="input100" type="text" name="gender" placeholder="Gender">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your address">
+                        <input class="input100" type="text" name="address" placeholder="Address">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your phone number">
+                        <input class="input100" type="text" name="pnum" placeholder="Phone">
+                        <span class="focus-input100"></span>
+                    </div>
+
+                    <div class="container-contact100-form-btn">
+                        <button class="contact100-form-btn" type="submit" id="submit">
+                            Register
+                        </button>
+                    </div>
+                </form>
+
+                <div class="contact100-more">
+                    Contact us on: <span class="contact100-more-highlight">medfork@chennai.com</span>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="dropDownSelect1"></div>
+
+        {{!-- scripts --}}
+        {{>scripts}}
+
+        {{!-- <script>
+            var vid = document.getElementById("myvideo");
+            vid.playbackRate = 0.5;
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-23581568-13');
+        </script> --}}
+
+</body>
+
+</html>

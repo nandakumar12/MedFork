@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Data Sharing</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv='cache-control' content='no-cache'>
+    <meta http-equiv='expires' content='0'>
+    <meta http-equiv='pragma' content='no-cache'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+    {{!-- styles --}}
+    {{>styles}}
+
+</head>
+
+<body>
+    <div class="main-body">
+        {{>navbar}}
+
+        <div class="container-contact100" style="padding: 70px; ">
+
+            <div class="contact100-map" id="google_map" data-map-x="40.722047" data-map-y="-73.986422"
+                data-pin="../../public/images/icons/map-marker.png" data-scrollwhell="0" data-draggable="1"></div>
+            <div class="bg-video">
+                <video id="myvideo" class="bg-video__content" autoplay muted loop>
+                    <source src="../../public/img/video.mp4" type="video/mp4">
+                    <source src="../../public/img/video.webm" type="video/webm">
+                    Your browser is not supported!
+                </video>
+            </div>
+
+            <div class="wrap-contact100">
+
+                <form class="contact100-form validate-form" method="POST" action="patient">
+                    <span class="contact100-form-title">
+                        Share Data
+                    </span>
+
+                    <div class="form-row p-t-20">
+                        <div>
+                            <label class="radio-container m-r-55">Add
+                                <input type="radio" checked="checked" name="exist" value="add">
+                                <span class="checkmark"></span>
+                            </label>
+                            <label class="radio-container">Revoke
+                                <input type="radio" name="exist" value="revoke">
+                                <span class="checkmark"></span>
+                            </label>
+                        </div>
+                    </div>
+
+
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your uuid">
+                        <input class="input100" type="text" name="uuid" placeholder="UUID" value={{patientUUID}}
+                            readonly>
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter your duid">
+                        <input class="input100" type="text" name="duid" placeholder="DUID">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter policy type">
+                        <input class="input100" type="text" name="policy" placeholder="Policy Type">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="wrap-input100 validate-input" data-validate="Please enter ipfs hash of data">
+                        <input class="input100" type="date" name="time" placeholder="">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="wrap-input100">
+                        <input class="input100" type="text" name="ipfsHash" placeholder="Data Hash">
+                        <span class="focus-input100"></span>
+                    </div>
+                    <div class="container-contact100-form-btn">
+                        <button class="contact100-form-btn" type="submit" id="submit">
+                            Share
+                        </button>
+                    </div>
+                </form>
+
+                <div class="contact100-more">
+                    Contact us on: <span class="contact100-more-highlight">medfork@chennai.com</span>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="dropDownSelect1"></div>
+
+        {{!-- scripts --}}
+        {{>scripts}}
+
+        <script>
+            var vid = document.getElementById("myvideo");
+            vid.playbackRate = 0.5;
+
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+
+            gtag('config', 'UA-23581568-13');
+        </script>
+
+</body>
+
+</html>

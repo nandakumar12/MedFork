@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags-->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="au theme template">
+    <meta name="author" content="Hau Nguyen">
+    <meta name="keywords" content="au theme template">
+
+    <!-- Title Page-->
+    <title>Prescription</title>
+
+    {{>dashboard-hospital-styles}}
+
+    <style>
+        thead {
+            background-color: #333;
+        }
+    </style>
+
+
+</head>
+
+
+<body class="animsition">
+    <div class="page-wrapper">
+
+        <!-- MENU SIDEBAR-->
+        {{>dashboard-doctor-sidebar}}
+        <!-- END MENU SIDEBAR-->
+
+        <!-- PAGE CONTAINER-->
+        <div class="page-container">
+            <!-- HEADER DESKTOP-->
+            {{>dashboard-doctor-header}}
+
+            <!-- END HEADER DESKTOP-->
+
+            <!-- MAIN CONTENT-->
+            <div class="main-content">
+                <div class="section__content section__content--p30">
+                    <div class="container-fluid">
+                        {{!-- Prescription --}}
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE -->
+                                <h3 class="title-5 m-b-35">BP Report</h3>
+                                <div class="table-responsive table-responsive-data2">
+                                    <table class="table table-data2">
+                                        <thead>
+                                            <tr>
+                                                <th style="color: white;">S.No</th>
+                                                <th style="color: white;">DUID</th>
+                                                <th style="color: white;">Hospital</th>
+                                                <th style="color: white;">Value</th>
+                                                <th style="color: white;">Date</th>
+                                                <th style="color: white;">status</th>
+                                                <th style="color: white;">More Info</th>
+                                                <th style="color: white;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="tr-shadow">
+                                                <td id="nos"></td>
+                                                <td>
+                                                    <span class="block-email">2222</span>
+                                                </td>
+                                                <td class="desc">SRM</td>
+                                                <td>
+                                                    <span class="block-email">150</span>
+                                                </td>
+                                                <td>{{this.date}}</td>
+                                                <td>
+                                                    <span class="status--process">Processed</span>
+                                                </td>
+                                                <td><a href="/check-prescription">Check</a></td>
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="Send">
+                                                            <i class="zmdi zmdi-mail-send"></i>
+                                                        </button>
+
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="More">
+                                                            <i class="zmdi zmdi-download"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="spacer"></tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END DATA TABLE -->
+                            </div>
+                        </div>
+
+                        <br><br>
+
+                        {{!-- BP Report --}}
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE -->
+                                <h3 class="title-5 m-b-35">Diabetes Report</h3>
+                                <div class="table-responsive table-responsive-data2">
+                                    <table class="table table-data2">
+                                        <thead>
+                                            <tr>
+                                                <th style="color: white;">S.No</th>
+                                                <th style="color: white;">DUID</th>
+                                                <th style="color: white;">Hospital</th>
+                                                <th style="color: white;">Date</th>
+                                                <th style="color: white;">Before Fasting</th>
+                                                <th style="color: white;">After Fasting</th>
+                                                <th style="color: white;">status</th>
+                                                <th style="color: white;">More Info</th>
+                                                <th style="color: white;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <tr class="tr-shadow">
+                                                <td>{{this.diabetes}}</td>
+                                                <td>
+                                                    <span class="block-email">2222</span>
+                                                </td>
+                                                <td class="desc">SRM</td>
+                                                <td>03 08 2020</td>
+                                                {{!-- {{#each this.diabetesLevel}} --}}
+                                                <td>120</td>
+                                                <td>200</td>
+                                                {{!-- {{/each}} --}}
+                                                <td>
+                                                    <span class="status--process">Processed</span>
+                                                </td>
+                                                <td><a href="/check-prescription">Check</a></td>
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="Send">
+                                                            <i class="zmdi zmdi-mail-send"></i>
+                                                        </button>
+
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="More">
+                                                            <i class="zmdi zmdi-download"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="spacer"></tr>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END DATA TABLE -->
+                            </div>
+                        </div>
+
+                        <br><br>
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE -->
+                                <h3 class="title-5 m-b-35">Prescription Detail</h3>
+                                <div class="table-responsive table-responsive-data2">
+                                    <table class="table table-data2">
+                                        <thead>
+                                            <tr>
+                                                <th style="color: white;">S.No</th>
+                                                <th style="color: white;">DUID</th>
+                                                <th style="color: white;">Hospital</th>
+                                                <th style="color: white;">Date</th>
+                                                <th style="color: white;">status</th>
+                                                <th style="color: white;">More Info</th>
+                                                <th style="color: white;"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="tr-shadow">
+                                                <td>{{this.bpS}}</td>
+                                                <td>
+                                                    <span class="block-email">2222</span>
+                                                </td>
+                                                <td class="desc">SRM</td>
+                                                <td>03 08 2020</td>
+                                                <td>
+                                                    <span class="status--process">Processed</span>
+                                                </td>
+                                                <td><a href="/check-prescription">Check</a></td>
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="Send">
+                                                            <i class="zmdi zmdi-mail-send"></i>
+                                                        </button>
+
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="More">
+                                                            <i class="zmdi zmdi-download"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="spacer"></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END DATA TABLE -->
+                            </div>
+                        </div>
+
+                        <br><br>
+
+                        {{!-- <div class="row">
+                            <div class="col-md-12">
+                                <!-- DATA TABLE -->
+                                <h3 class="title-5 m-b-35">Medicine Details</h3>
+                                <div class="table-responsive table-responsive-data2">
+                                    <table class="table table-data2">
+                                        <thead>
+                                            <tr>
+                                                <th style="color: white;">S.No</th>
+                                                <th style="color: white;">Name</th>
+                                                <th style="color: white;">Amount</th>
+                                                <th style="color: white;">When</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {{#each prescriptionDetails}}
+                                            <tr class="tr-shadow">
+                                                <td>{{this.bpS}}</td>
+                                                <td>{{this.medicineName}}</td>
+                                                <td>
+                                                    <span class="block-email">{{this.amount}}</span>
+                                                </td>
+                                                <td class="desc">{{this.when}}</td>
+                                                <td>
+                                                    <span class="status--process">Processed</span>
+                                                </td>
+                                                <td><a href="/check-prescription">Check</a></td>
+                                                <td>
+                                                    <div class="table-data-feature">
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="Send">
+                                                            <i class="zmdi zmdi-mail-send"></i>
+                                                        </button>
+
+                                                        <button class="item" data-toggle="tooltip" data-placement="top"
+                                                            title="More">
+                                                            <i class="zmdi zmdi-download"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr class="spacer"></tr>
+                                            {{/each}}
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- END DATA TABLE -->
+                            </div>
+                        </div> --}}
+
+
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="copyright">
+                                    <p>Copyright © 2018 MedFork All rights reserved.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    {{>dashboard-hospital-scripts}}
+
+    <script>
+        let nos = 1;
+        document.getElementById('nos').addEventListener('load', () => {
+            document.getElementById('nos').innerHTML = nos++;
+        });
+    </script>
+
+</body>
+
+</html>
+<!-- end document-->
