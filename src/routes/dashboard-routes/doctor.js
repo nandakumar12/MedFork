@@ -3,8 +3,6 @@ const axios = require("axios");
 const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
-const { MerkleTree } = require('merkletreejs')
-const SHA256 = require('crypto-js/sha256')
 
 const { MedicalDetials } = require("../../schemas/medical-details-model");
 const PatientDetails = require("../../schemas/patient-details-model");
@@ -45,7 +43,7 @@ const upload = multer({
   storage,
 });
 
-const getHospitalRoute = (blockchain, merkleTree) => {
+const getHospitalRoute = (blockchain) => {
   const router = express.Router();
 
   let doctorDetails;
@@ -291,104 +289,55 @@ const getHospitalRoute = (blockchain, merkleTree) => {
     const dataHash = req.body.data_hash;
     console.log("-> ", patientUID, doctorUID, dataHash);
 
-    if(){
-      for(let idx=0;idx<merkleTree.tree.length;idx++){
-        const tree = merkleTree.tree[idx];
-        if(tree.duid == doctorUID && tree.uid == patientUID ){
-          const leaf = SHA256(dataHash);
-          const proof =tree.getProof(leaf)
-          if (tree.verify(proof, leaf, tree.root)){
 
 
-            for (let blockNo = blockchain.chain.length - 1; blockNo >= 0; blockNo--) {
-              const transactions = blockchain.chain[blockNo].transactions;
-              for (let idx = 0; idx < transactions.length; idx++) {
-                if (transactions[idx].transactionType == "policy" && transactions[idx].capsule.startsWith("multi")) {
-                  const currentTransaction =
-                    blockchain.chain[blockNo].transactions[idx];
-                    if(currentTransaction.ipfsFileHash == dataHash){
-                      const capsule=currentTransaction.capsule;
-                      axios.post("http://127.0.0.1:8099/reEncrypt/multifile", {
-                        s_uid: patientUID,
-                        r_uid: doctorUID,
-                        file_hash: dataHash,
-                        capsule,
-                      })
-                      .then((result) => {
-                        console.log("result -> ", res);
-                        if (result.data.status == "success") {
-                          console.log("responce from datasharing -> ",result.data.decryptedMessage);
-                          sharedRecords = deepParseJson(result.data.decryptedMessage);
-                          res.render("dashboard-doctor/shared-reports", {
-                            uid: sharedRecords._id,
-                            duid: sharedRecords.duid,
-                            diabetesLevel: sharedRecords.diabetesLevel,
-                            bpLevel: sharedRecords.bpLevel,
-                            prescriptionDetails: sharedRecords.prescriptionDetails,
-                            hospitalName: sharedRecords.hospitalName,
-                            date: sharedRecords.date
-                          });
-                          return ;
-                        }
-                      });
-                  }
-                }
-              }
-            }
-                
-          }
-        }
-      }
-    }
-    else
-    {
-    for (let blockNo = blockchain.chain.length - 1; blockNo >= 0; blockNo--) {
-      console.log(blockchain.chain);
-      const transactions = blockchain.chain[blockNo].transactions;
-      for (let idx = 0; idx < transactions.length; idx++) {
-        if (transactions[idx].transactionType == "policy") {
-          const currentTransaction =
-            blockchain.chain[blockNo].transactions[idx];
-          if (
-            currentTransaction.senderUID == patientUID &&
-            currentTransaction.receiverUID == doctorUID &&
-            currentTransaction.dataHash == dataHash &&
-            currentTransaction.remove == true
-          ) {
-            res.render("dashboard-doctor/shared-data", {
-              error: "Patient revoked access!!",
-            });
-            return console.log("Sorry the paient has revoked access");
-          }
-        }
-      }
-    }
+    // for (let blockNo = blockchain.chain.length - 1; blockNo >= 0; blockNo--) {
+    //   console.log(blockchain.chain);
+    //   const transactions = blockchain.chain[blockNo].transactions;
+    //   for (let idx = 0; idx < transactions.length; idx++) {
+    //     if (transactions[idx].transactionType == "policy") {
+    //       const currentTransaction =
+    //         blockchain.chain[blockNo].transactions[idx];
+    //       if (
+    //         currentTransaction.senderUID == patientUID &&
+    //         currentTransaction.receiverUID == doctorUID &&
+    //         currentTransaction.dataHash == dataHash &&
+    //         currentTransaction.remove == true
+    //       ) {
+    //         res.render("dashboard-doctor/shared-data", {
+    //           error: "Patient revoked access!!",
+    //         });
+    //         return console.log("Sorry the paient has revoked access");
+    //       }
+    //     }
+    //   }
+    // }
 
-    axios.post("http://127.0.0.1:8099/reEncrypt", {
-        s_uid: patientUID,
-        r_uid: doctorUID,
-        public_key_digitalsign: dataHash,
-      })
-      .then((result) => {
-        console.log("result -> ", res);
-        if (result.data.status == "success") {
-          console.log("responce from datasharing -> ",result.data.decryptedMessage);
-          sharedRecords = deepParseJson(result.data.decryptedMessage);
-          res.render("dashboard-doctor/shared-reports", {
-            uid: sharedRecords._id,
-            duid: sharedRecords.duid,
-            diabetesLevel: sharedRecords.diabetesLevel,
-            bpLevel: sharedRecords.bpLevel,
-            prescriptionDetails: sharedRecords.prescriptionDetails,
-            hospitalName: sharedRecords.hospitalName,
-            date: sharedRecords.date
-          });
-          return ;
-        }
-      });
-    }
+    // axios.post("http://127.0.0.1:8099/reEncrypt", {
+    //     s_uid: patientUID,
+    //     r_uid: doctorUID,
+    //     public_key_digitalsign: dataHash,
+    //   })
+    //   .then((result) => {
+    //     console.log("result -> ", res);
+    //     if (result.data.status == "success") {
+    //       console.log("responce from datasharing -> ",result.data.decryptedMessage);
+    //       sharedRecords = deepParseJson(result.data.decryptedMessage);
+    //       res.render("dashboard-doctor/shared-reports", {
+    //         uid: sharedRecords._id,
+    //         duid: sharedRecords.duid,
+    //         diabetesLevel: sharedRecords.diabetesLevel,
+    //         bpLevel: sharedRecords.bpLevel,
+    //         prescriptionDetails: sharedRecords.prescriptionDetails,
+    //         hospitalName: sharedRecords.hospitalName,
+    //         date: sharedRecords.date
+    //       });
+    //       return ;
+    //     }
+    //   });
+    
+    res.render("dashboard-doctor/shared-reports");
   });
-  
 
   return router;
 };

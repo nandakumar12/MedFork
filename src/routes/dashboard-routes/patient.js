@@ -9,7 +9,7 @@ const { MerkleTree } = require("merkletreejs");
 const SHA256 = require("crypto-js/sha256");
 const e = require("express");
 
-const getPatientRoute = (blockchain) => {
+const getPatientRoute = (blockchain, merkleTree) => {
   const router = express.Router();
   let patientDetails;
   let medicalDetails;
@@ -210,6 +210,7 @@ const getPatientRoute = (blockchain) => {
           const tree = new MerkleTree(leaves, SHA256);
           MerkleTree.print(tree);
           const root = tree.getRoot().toString("hex");
+          merkleTree.addTree(patientUUID, req.body.duid, tree, root)
 
           axios
             .post("http://127.0.0.1:8099/newPolicy", {
@@ -248,7 +249,10 @@ const getPatientRoute = (blockchain) => {
               console.log("Error during creating new policy", err);
             });
         });
-    } else {
+    } 
+    
+    
+    else {
       console.log("chain -> ", blockchain.chain[1].transactions);
       let capsule = null;
       for (const block of blockchain.chain) {
@@ -305,7 +309,7 @@ const getPatientRoute = (blockchain) => {
       patientName: patientDetails.name,
       patientUID: patientDetails.uuid,
     });
-    
+
   });
 
   return router;
