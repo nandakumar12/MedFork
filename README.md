@@ -1,4 +1,6 @@
-# <center>MedFork<center>
+![output-onlinepngtools](https://user-images.githubusercontent.com/17951801/89218387-90b47d80-d5eb-11ea-9378-9acfdf6ad0ee.png)
+
+# <center>MedFork - Blockchain based EHR<center>
 
 
 This project uses poc blockchain implemention and other encryption techniques inorder to solve security and privacy issues in exisiting EHR systems.
