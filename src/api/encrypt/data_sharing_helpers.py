@@ -139,11 +139,13 @@ def re_encrypt():
         ciphertext=file.read()
     try:
         response = pre.decrypt(ciphertext=ciphertext, capsule=new_capsule, decrypting_key=reciever_private_key)#.decode()
+        print(response.decode())
     except:
         response = "failed"
     if response == "failed":
         return jsonify({"status":"failed","message":"Either the data must be tampered or invalid private key"}),200
     else:
+        print("The decrypted data is",response.decode())
         return jsonify({"status":"success","decryptedMessage":response.decode()})
 
 port = 8099

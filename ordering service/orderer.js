@@ -29,7 +29,6 @@ const run = async () => {
 };
 run().catch((e) => console.error(`[example/consumer] ${e.message}`, e));
 
-
 const blockBuilder = () => {
   console.log("Orderer waiting for Transaction")
   if (currentTransactions.length != 0 && currentTransactions.length<7518) {

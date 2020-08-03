@@ -5,6 +5,7 @@ import chalk
 from flask import Flask, jsonify, request
 
 
+CURRENT_FILE = os.path.dirname(__file__)
 ENCRYPTED_FILES_PATH = os.path.join(CURRENT_FILE, '../../../encrypted-files')
 
 app = Flask(__name__)

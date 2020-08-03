@@ -1,39 +1,35 @@
-let kafka = require("kafka-node");
 const axios = require("axios");
+const { Kafka } = require("kafkajs");
 
-const client = new kafka.KafkaClient({ kafkaHost: "127.0.0.1:9092" });
-
-console.log("Initialised..");
-const topics = [
-  {
-    topic: "new_topic1",
-    offset: 3,
-    partition: 0,
-  },
-];
-
-const options = {
-  autoCommit: true,
-};
-
-const consumer = new kafka.Consumer(client, topics, options);
-
-consumer.setMaxListeners(11);
-
-consumer.on("ready", function (message) {
-  console.log("Kafka Consumer is ready");
+const kafka = new Kafka({
+  brokers: ["localhost:9092"],
+  clientId: "kafka-new-node-consumer",
 });
-consumer.on("message", function (message) {
-  console.log("Message: ", message.value);
-  axios.post("http://127.0.0.1:8081/blockchain/nodes/register", {
-    nodes: [JSON.parse(message.value).messageData],
-  }).then(res=>{
-      console.log("New hospital node details sent")
-  }).catch(err=>{
-      console.log("cant able to publish the Hospital node info",err);
+
+const topic = "new_topic1";
+const consumer = kafka.consumer({ groupId: "group-1" });
+
+const run = async () => {
+  await consumer.connect();
+  await consumer.subscribe({ topic, fromBeginning: false });
+  await consumer.run({
+    // eachBatch: async ({ batch }) => {
+    //   console.log(batch)
+    // },
+    eachMessage: async ({ topic, partition, message }) => {
+      const prefix = `${topic}[${partition} | ${message.offset}] / ${message.timestamp}`;
+      console.log(`- ${message.key}#${message.value}`);
+      axios
+        .post("http://127.0.0.1:8081/blockchain/nodes/register", {
+          nodes: [JSON.parse(message.value).messageData],
+        })
+        .then((res) => {
+          console.log("New hospital node details sent");
+        })
+        .catch((err) => {
+          console.log("cant able to publish the Hospital node info", err);
+        });
+    },
   });
-});
-
-consumer.on("error", function (err) {
-  console.log("error", err);
-});
+};
+run().catch((e) => console.error(`[example/consumer] ${e.message}`, e));
