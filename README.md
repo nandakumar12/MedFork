@@ -1,4 +1,5 @@
- ![output-onlinepngtools](https://user-images.githubusercontent.com/17951801/89218387-90b47d80-d5eb-11ea-9378-9acfdf6ad0ee.png)
+
+ ![Medfork](https://user-images.githubusercontent.com/17951801/89218387-90b47d80-d5eb-11ea-9378-9acfdf6ad0ee.png)
 
 # <center>MedFork - Blockchain based EHR<center>
 
@@ -45,3 +46,10 @@ Configure *`AsyncConfig.java`* in the below package
 
     npm run dev
 
+## Data Storage Mechanism
+![Medfork](https://user-images.githubusercontent.com/17951801/89218985-9a8ab080-d5ec-11ea-91d0-c3e8562dd18f.png)
+
+## Encryption Technique
+![Medfork](https://user-images.githubusercontent.com/17951801/89219160-ea697780-d5ec-11ea-9b08-c486b6791acc.png)
+## Transactions and Ordering
+![Medfork](https://user-images.githubusercontent.com/17951801/89219302-213f8d80-d5ed-11ea-927b-7ae46d464579.png)
