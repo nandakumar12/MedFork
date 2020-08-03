@@ -43,7 +43,7 @@ const upload = multer({
   storage,
 });
 
-const getHospitalRoute = (blockchain, remove) => {
+const getHospitalRoute = (blockchain) => {
   const router = express.Router();
 
   let doctorDetails;
@@ -289,58 +289,54 @@ const getHospitalRoute = (blockchain, remove) => {
     const dataHash = req.body.data_hash;
     console.log("-> ", patientUID, doctorUID, dataHash);
 
-    if (remove == 0) {
-      res.render("dashboard-doctor/shared-reports");
-    } else {
-      res.render("dashboard-doctor/shared-data", {
-        error: "Patient revoked access!!",
-      });
+
+
+    for (let blockNo = blockchain.chain.length - 1; blockNo >= 0; blockNo--) {
+      console.log(blockchain.chain);
+      const transactions = blockchain.chain[blockNo].transactions;
+      for (let idx = 0; idx < transactions.length; idx++) {
+        if (transactions[idx].transactionType == "policy") {
+          const currentTransaction =
+            blockchain.chain[blockNo].transactions[idx];
+          if (
+            currentTransaction.senderUID == patientUID &&
+            currentTransaction.receiverUID == doctorUID &&
+            currentTransaction.dataHash == dataHash &&
+            currentTransaction.remove == true
+          ) {
+            res.render("dashboard-doctor/shared-data", {
+              error: "Patient revoked access!!",
+            });
+            return console.log("Sorry the paient has revoked access");
+          }
+        }
+      }
     }
 
-    // for (let blockNo = blockchain.chain.length - 1; blockNo >= 0; blockNo--) {
-    //   console.log(blockchain.chain);
-    //   const transactions = blockchain.chain[blockNo].transactions;
-    //   for (let idx = 0; idx < transactions.length; idx++) {
-    //     if (transactions[idx].transactionType == "policy") {
-    //       const currentTransaction =
-    //         blockchain.chain[blockNo].transactions[idx];
-    //       if (
-    //         currentTransaction.senderUID == patientUID &&
-    //         currentTransaction.receiverUID == doctorUID &&
-    //         currentTransaction.dataHash == dataHash &&
-    //         currentTransaction.remove == true
-    //       ) {
-    //         res.render("dashboard-doctor/shared-data", {
-    //           error: "Patient revoked access!!",
-    //         });
-    //         return console.log("Sorry the paient has revoked access");
-    //       }
-    //     }
-    //   }
-    // }
-
-    // axios.post("http://127.0.0.1:8099/reEncrypt", {
-    //     s_uid: patientUID,
-    //     r_uid: doctorUID,
-    //     public_key_digitalsign: dataHash,
-    //   })
-    //   .then((result) => {
-    //     console.log("result -> ", res);
-    //     if (result.data.status == "success") {
-    //       console.log("responce from datasharing -> ",result.data.decryptedMessage);
-    //       sharedRecords = deepParseJson(result.data.decryptedMessage);
-    //       res.render("dashboard-doctor/shared-reports", {
-    //         uid: sharedRecords._id,
-    //         duid: sharedRecords.duid,
-    //         diabetesLevel: sharedRecords.diabetesLevel,
-    //         bpLevel: sharedRecords.bpLevel,
-    //         prescriptionDetails: sharedRecords.prescriptionDetails,
-    //         hospitalName: sharedRecords.hospitalName,
-    //         date: sharedRecords.date
-    //       });
-    //       return ;
-    //     }
-    //   });
+    axios.post("http://127.0.0.1:8099/reEncrypt", {
+        s_uid: patientUID,
+        r_uid: doctorUID,
+        public_key_digitalsign: dataHash,
+      })
+      .then((result) => {
+        console.log("result -> ", res);
+        if (result.data.status == "success") {
+          console.log("responce from datasharing -> ",result.data.decryptedMessage);
+          sharedRecords = deepParseJson(result.data.decryptedMessage);
+          res.render("dashboard-doctor/shared-reports", {
+            uid: sharedRecords._id,
+            duid: sharedRecords.duid,
+            diabetesLevel: sharedRecords.diabetesLevel,
+            bpLevel: sharedRecords.bpLevel,
+            prescriptionDetails: sharedRecords.prescriptionDetails,
+            hospitalName: sharedRecords.hospitalName,
+            date: sharedRecords.date
+          });
+          return ;
+        }
+      });
+    
+    res.render("dashboard-doctor/shared-reports");
   });
 
   return router;
