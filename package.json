@@ -16,7 +16,7 @@
     "deep-parse-json": "^1.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
-    "express-handlebars": "^5.1.0",
+    "express-handlebars": "^5.3.1",
     "form-data": "^3.0.0",
     "hbs": "^4.1.1",
     "kafka-node": "^5.0.0",
